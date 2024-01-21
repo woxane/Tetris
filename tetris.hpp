@@ -13,6 +13,7 @@ struct Block {
 
 struct Game {
     int FPS;
+    bool CannotMove = false; 
     Block Board[20][10];
 
 };
@@ -24,6 +25,7 @@ bool Compare();
 
 // game.cpp Part : 
 std::vector<std::vector<int>> DroppingBlock(Block Board[20][10]);
+void Drop(Block Board[20][10] , bool CannotMove);
 
 // screen.cpp Part :
 void Draw(Block Board[20][10]); 

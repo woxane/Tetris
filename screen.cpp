@@ -17,7 +17,7 @@ void Draw(Block Board[20][10]) {
                 continue;  
             }
 
-            if (Board[Col][Row].Shape != 0 ) {
+            if (Board[Col - 1][Row - 1].Shape != 0 ) {
                 std::cout << "█";
             }
         }

@@ -10,7 +10,7 @@ void Cls();
 void Draw(Block Board[20][10]); 
 
 struct Block {
-    // Between 0 , 6  
+    // Between 1 , 7  
     int Shape;
     bool Dropping; 
 

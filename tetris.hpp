@@ -7,7 +7,7 @@ char Getch();
 void Cls();
 
 // screen.cpp Part :
-void Draw(Block Board[10][20]); 
+void Draw(Block Board[20][10]); 
 
 struct Block {
     // Between 0 , 6  

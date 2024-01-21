@@ -15,3 +15,27 @@ std::vector<std::vector<int>> DroppingBlock(Block Board[20][10]) {
     return Cords;      
 
 }
+
+void Drop(Block Board[20][10] , bool CannotMove) {
+    std::vector<std::vector<int>> Cords = DroppingBlock(Board);
+    int Shape = Board[Cords[0][0]][Cords[0][1]].Shape; 
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
+        if (Cords[i][0] - 1 < 0 ) {
+            CannotMove = true ; 
+            return ; 
+        }
+
+        if (Board[Cords[i][0] - 1][Cords[i][1]].Shape == 0) {
+            CannotMove = true; 
+            Board[Cords[i][0] - 1][Cords[i][1]].Dropping = false ; 
+            return; 
+        }
+    } 
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
+        Board[Cords[i][0]][Cords[i][1]].Shape = 0; 
+        Board[Cords[i][0] - 1][Cords[i][1]].Shape = Shape; 
+        Board[Cords[i][0] - 1][Cords[i][1]].Dropping = true;
+    }
+}

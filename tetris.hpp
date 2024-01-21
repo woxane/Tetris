@@ -1,11 +1,13 @@
 #include <iostream>
 #include <termios.h>
 #include <unistd.h>
-#include <vector>
 
-
+// utils.cpp Part : 
 char Getch();
 void Cls();
+
+// screen.cpp Part :
+void Draw(Block Board[10][20]); 
 
 struct Block {
     // Between 0 , 6  

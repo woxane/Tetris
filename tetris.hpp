@@ -1,28 +1,29 @@
 #include <iostream>
 #include <termios.h>
 #include <unistd.h>
+#include <algorithm>
 
 
 struct Block {
     // Between 1 , 7  
-    int Shape;
-    bool Dropping; 
+    int Shape = 0;
+    bool Dropping = false; 
 
 };
 
 struct Game {
     int FPS;
-    Block Board[10][20];
+    Block Board[20][10];
 
 };
 
 // utils.cpp Part : 
 char Getch();
 void Cls();
+bool Compare(); 
 
 // game.cpp Part : 
-void Game();
-
+std::vector<std::vector<Block>> DropingBlock(Block Board[20][10]);
 
 // screen.cpp Part :
 void Draw(Block Board[20][10]); 

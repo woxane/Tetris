@@ -1,6 +1,6 @@
 #include "tetris.hpp"
 
-std::vector<std::vector<int>> DropingBlock(Block Board[20][10]) {
+std::vector<std::vector<int>> DroppingBlock(Block Board[20][10]) {
     std::vector<std::vector<int>> Cords; 
     for (int Col = 0 ; Col < 20 ; Col++) {
         for (int Row = 0 ; Row < 10 ; Row++) {

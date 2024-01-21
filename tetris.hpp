@@ -20,5 +20,9 @@ struct Game {
 char Getch();
 void Cls();
 
+// game.cpp Part : 
+void Game();
+
+
 // screen.cpp Part :
 void Draw(Block Board[20][10]); 

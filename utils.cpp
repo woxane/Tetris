@@ -31,3 +31,7 @@ char Getch() {
 void Cls() {
 	std::cout << "\033[2J\033[1;1H";
 }
+
+bool Compare(const std::vector<int>& a, const std::vector<int>& b) {
+    return a[0] < b[0];
+}

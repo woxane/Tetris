@@ -59,12 +59,13 @@ void Drop(Block Board[20][10] , bool& CannotMove) {
     for (int i = 0 ; i < MainCords.size() ; i++) {
         if (MainCords[i][0] + 1 > 19 ) {
             CannotMove = true ; 
+            Board[MainCords[i][0]][MainCords[i][1]].Dropping = false ; 
             return ; 
         }
 
         if (Board[MainCords[i][0] + 1][MainCords[i][1]].Shape != 0) {
             CannotMove = true; 
-            Board[MainCords[i][0] + 1][MainCords[i][1]].Dropping = false ; 
+            Board[MainCords[i][0]][MainCords[i][1]].Dropping = false ; 
             return; 
         }
     } 

@@ -24,8 +24,9 @@ void Cls();
 bool Compare(); 
 
 // game.cpp Part : 
-std::vector<std::vector<int>> DroppingBlock(Block Board[20][10]);
-void Drop(Block Board[20][10] , bool CannotMove);
+void Play(Game game);
+std::vector<std::vector<int> > DroppingBlock(Block Board[20][10]);
+void Drop(Block Board[20][10] , bool& CannotMove);
 
 // screen.cpp Part :
 void Draw(Block Board[20][10]); 

@@ -15,6 +15,7 @@ struct Block {
 struct Game {
     int FPS;
     bool CannotMove = false; 
+    bool NewShape = false;
     Block Board[20][10];
 
 };

@@ -79,14 +79,16 @@ void Drop(Block Board[20][10] , bool& CannotMove) {
 }
 
 
-bool GameOver(Block Board[20][10]) {
+void CheckDeath(Block Board[20][10] , bool& GameOver) {
     for (int Row = 0 ; Row < 10 ; Row++) {
         if (Board[0][Row].Dropping == false & Board[0][Row].Shape != 0 ) {
-            return true; 
+            GameOver = true;
+            return ; 
         }
     }
 
-    return false ; 
+    GameOver = false;
+    return ; 
 }
 
 int RandomShape() {

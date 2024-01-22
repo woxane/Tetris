@@ -15,7 +15,8 @@ struct Block {
 struct Game {
     int FPS;
     bool CannotMove = false; 
-    bool NewShape = false;
+    bool NewShape = true;
+    bool GameOver = false;
     Block Board[20][10];
 
 };
@@ -28,8 +29,8 @@ bool Compare(const std::vector<int>& a, const std::vector<int>& b);
 // game.cpp Part : 
 void Play(Game game);
 std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> DroppingBlock(Block Board[20][10]);
-void Drop(Block Board[20][10] , bool& CannotMove);
-bool GameOver(Block Board[20][10]);
+void Drop(Block Board[20][10] , bool& CannotMove , bool& NewShape);
+void CheckDeath(Block Board[20][10] , bool& GameOver);
 int RandomShape();
 void AddShape(Block Board[20][10] , int ShapeType);
 

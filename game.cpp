@@ -80,7 +80,7 @@ void Drop(Block Board[20][10] , bool& CannotMove) {
 
 bool GameOver(Block Board[20][10]) {
     for (int Row = 0 ; Row < 10 ; Row++) {
-        if (Board[0][Row].Dropping == false) {
+        if (Board[0][Row].Dropping == false & Board[0][Row].Shape != 0 ) {
             return true; 
         }
     }

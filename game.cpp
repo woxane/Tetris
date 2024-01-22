@@ -76,3 +76,14 @@ void Drop(Block Board[20][10] , bool& CannotMove) {
         Board[Cords[i][0] + 1][Cords[i][1]].Dropping = true;
     }
 }
+
+
+bool GameOver(Block Board[20][10]) {
+    for (int Row = 0 ; Row < 10 ; Row++) {
+        if (Board[0][Row].Dropping == false) {
+            return true; 
+        }
+    }
+
+    return false ; 
+}

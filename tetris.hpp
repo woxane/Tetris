@@ -31,6 +31,7 @@ std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Droppin
 void Drop(Block Board[20][10] , bool& CannotMove);
 bool GameOver(Block Board[20][10]);
 int RandomShape();
+void AddShape(Block Board[20][10] , int ShapeType);
 
 // screen.cpp Part :
 void Draw(Block Board[20][10]); 

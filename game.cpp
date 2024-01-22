@@ -22,34 +22,49 @@ void Play(Game game) {
 }
 
 
-std::vector<std::vector<int>> DroppingBlock(Block Board[20][10]) {
+std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> DroppingBlock(Block Board[20][10]) {
     std::vector<std::vector<int>> Cords; 
     for (int Col = 0 ; Col < 20 ; Col++) {
         for (int Row = 0 ; Row < 10 ; Row++) {
+             if (Board[Col][Row].Dropping) {
+                 std::vector<int> Cord = {Col , Row};
+                 Cords.push_back(Cord);
+             }
+         }
+     }
+    // MainCords are cordination that is important for drop 
+    std::vector<std::vector<int>> MainCords; 
+    for (int Row = 0 ; Row < 10 ; Row++) {
+        for (int Col = 19 ; Col >= 0 ; Col--) {
             if (Board[Col][Row].Dropping) {
                 std::vector<int> Cord = {Col , Row};
-                Cords.push_back(Cord);
+                MainCords.push_back(Cord); 
+                break ; 
             }
         }
     }
 
-    return Cords;      
+    std::sort(Cords.begin() , Cords.end() , Compare);
 
+    return {MainCords , Cords};       
 }
 
 void Drop(Block Board[20][10] , bool& CannotMove) {
-    std::vector<std::vector<int> > Cords = DroppingBlock(Board);
+    std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Data = DroppingBlock(Board);
+    std::vector<std::vector<int> > Cords = Data.second; 
+    std::vector<std::vector<int> > MainCords = Data.first;  
+
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape; 
-    
-    for (int i = 0 ; i < Cords.size() ; i++) {
-        if (Cords[i][0] + 1 > 19 ) {
+
+    for (int i = 0 ; i < MainCords.size() ; i++) {
+        if (MainCords[i][0] + 1 > 19 ) {
             CannotMove = true ; 
             return ; 
         }
 
-        if (Board[Cords[i][0] + 1][Cords[i][1]].Shape != 0) {
+        if (Board[MainCords[i][0] + 1][MainCords[i][1]].Shape != 0) {
             CannotMove = true; 
-            Board[Cords[i][0] + 1][Cords[i][1]].Dropping = false ; 
+            Board[MainCords[i][0] + 1][MainCords[i][1]].Dropping = false ; 
             return; 
         }
     } 

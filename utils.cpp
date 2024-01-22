@@ -33,5 +33,8 @@ void Cls() {
 }
 
 bool Compare(const std::vector<int>& a, const std::vector<int>& b) {
-    return a[0] < b[0];
+	if (a[0] != b[0]) {
+		return a[0] < b[0] ; 
+	}
+    return a[1] < b[1];
 }

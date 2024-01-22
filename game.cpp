@@ -87,3 +87,12 @@ bool GameOver(Block Board[20][10]) {
 
     return false ; 
 }
+
+int RandomShape() {
+    std::random_device rd ; 
+    std::mt19937 gen(rd()) ;
+    std::uniform_int_distribution<int> Distr(1, 7); 
+    int Num = Distr(gen); 
+
+    return Num ; 
+}

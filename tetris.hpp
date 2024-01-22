@@ -25,7 +25,7 @@ bool Compare(const std::vector<int>& a, const std::vector<int>& b);
 
 // game.cpp Part : 
 void Play(Game game);
-std::vector<std::vector<int> > DroppingBlock(Block Board[20][10]);
+std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> DroppingBlock(Block Board[20][10]);
 void Drop(Block Board[20][10] , bool& CannotMove);
 
 // screen.cpp Part :

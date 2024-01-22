@@ -7,15 +7,25 @@ void Play(Game game) {
     
     // This must change to game.Gameover 
     // or something , but for now 
-    while (!game.CannotMove) {
+    while (!game.GameOver) {
         Draw(game.Board); 
         // Level is gonna based on the number we mod with COUNT 
+
+        if (game.NewShape) {
+            int ShapeType = RandomShape(); 
+            AddShape(game.Board , ShapeType); 
+            Drop(game.Board , game.CannotMove , game.NewShape);
+            game.NewShape = false;  
+        
+        }
+
         if (COUNT % 10 == 0) {
-            Drop(game.Board , game.CannotMove);
+            Drop(game.Board , game.CannotMove , game.NewShape);
         }
 
         usleep(DeltaTime); 
         Cls();
+        CheckDeath(game.Board , game.GameOver); 
         COUNT++;
 
     }

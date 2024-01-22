@@ -96,3 +96,10 @@ int RandomShape() {
 
     return Num ; 
 }
+
+
+void AddShape(Block Board[20][10] , int ShapeType) {
+    Board[0][5].Shape = ShapeType; 
+    Board[0][5].Dropping = true ; 
+
+}

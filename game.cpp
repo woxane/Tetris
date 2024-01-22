@@ -1,5 +1,27 @@
 #include "tetris.hpp"
 
+void Play(Game game) { 
+    int COUNT = 1; 
+    // In Micorseconds : 
+    int DeltaTime = 1000000 / game.FPS;
+    
+    // This must change to game.Gameover 
+    // or something , but for now 
+    while (!game.CannotMove) {
+        Draw(game.Board); 
+        // Level is gonna based on the number we mod with COUNT 
+        if (COUNT % 10 == 0) {
+            Drop(game.Board , game.CannotMove);
+        }
+
+        usleep(DeltaTime); 
+        Cls();
+        COUNT++;
+
+    }
+}
+
+
 std::vector<std::vector<int>> DroppingBlock(Block Board[20][10]) {
     std::vector<std::vector<int>> Cords; 
     for (int Col = 0 ; Col < 20 ; Col++) {
@@ -10,7 +32,6 @@ std::vector<std::vector<int>> DroppingBlock(Block Board[20][10]) {
             }
         }
     }
-    std::sort(Cords.begin() , Cords.end() , Compare);
 
     return Cords;      
 

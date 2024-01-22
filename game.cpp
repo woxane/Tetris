@@ -49,7 +49,7 @@ std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Droppin
     return {MainCords , Cords};       
 }
 
-void Drop(Block Board[20][10] , bool& CannotMove) {
+void Drop(Block Board[20][10] , bool& CannotMove , bool& NewShape) {
     std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Data = DroppingBlock(Board);
     std::vector<std::vector<int> > Cords = Data.second; 
     std::vector<std::vector<int> > MainCords = Data.first;  
@@ -59,12 +59,14 @@ void Drop(Block Board[20][10] , bool& CannotMove) {
     for (int i = 0 ; i < MainCords.size() ; i++) {
         if (MainCords[i][0] + 1 > 19 ) {
             CannotMove = true ; 
+            NewShape= true;
             Board[MainCords[i][0]][MainCords[i][1]].Dropping = false ; 
             return ; 
         }
 
         if (Board[MainCords[i][0] + 1][MainCords[i][1]].Shape != 0) {
             CannotMove = true; 
+            NewShape = true;
             Board[MainCords[i][0]][MainCords[i][1]].Dropping = false ; 
             return; 
         }

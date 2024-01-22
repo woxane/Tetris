@@ -21,7 +21,7 @@ struct Game {
 // utils.cpp Part : 
 char Getch();
 void Cls();
-bool Compare(); 
+bool Compare(const std::vector<int>& a, const std::vector<int>& b);
 
 // game.cpp Part : 
 void Play(Game game);

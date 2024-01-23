@@ -5,20 +5,23 @@ void Play(Game game) {
     // In Micorseconds : 
     int DeltaTime = 1000000 / game.FPS;
     
-    // This must change to game.Gameover 
-    // or something , but for now 
     while (!game.GameOver) {
         Draw(game.Board); 
-        // Level is gonna based on the number we mod with COUNT 
 
         if (game.NewShape) {
             int ShapeType = RandomShape(); 
-            AddShape(game.Board , ShapeType); 
+            AddShape(game.Board , ShapeType , game.GameOver , game.ShapeCords[ShapeType]); 
+
+            if (game.GameOver) {
+                break;
+            }
+
             Drop(game.Board , game.CannotMove , game.NewShape);
             game.NewShape = false;  
         
         }
 
+        // Level is gonna based on the number we mod with COUNT 
         if (COUNT % 10 == 0) {
             Drop(game.Board , game.CannotMove , game.NewShape);
         }
@@ -113,8 +116,18 @@ int RandomShape() {
 }
 
 
-void AddShape(Block Board[20][10] , int ShapeType) {
-    Board[0][5].Shape = ShapeType; 
-    Board[0][5].Dropping = true ; 
+void AddShape(Block Board[20][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords) {
+    for (int i = 0 ; i < BlockCords.size() ; i++) {
+        if (Board[BlockCords[i][0]][BlockCords[i][1]].Shape != 0) {
+            GameOver = true;
+            return;
+        }
+    }
 
+    for (int i = 0 ; i < BlockCords.size() ; i++) {
+        Board[BlockCords[i][0]][BlockCords[i][1]].Shape = ShapeType;
+        Board[BlockCords[i][0]][BlockCords[i][1]].Dropping = true;
+    }
+    
+    return;
 }

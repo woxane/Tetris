@@ -84,7 +84,7 @@ std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Droppin
 void Drop(Block Board[20][10] , bool& CannotMove , bool& NewShape);
 void CheckDeath(Block Board[20][10] , bool& GameOver);
 int RandomShape();
-void AddShape(Block Board[20][10] , int ShapeType);
+void AddShape(Block Board[20][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords);
 
 // screen.cpp Part :
 void Draw(Block Board[20][10]); 

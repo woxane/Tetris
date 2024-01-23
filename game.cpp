@@ -132,3 +132,12 @@ void AddShape(Block Board[20][10] , int ShapeType , bool& GameOver , std::vector
     
     return;
 }
+
+
+void BlockFall(Block Board[20][10] , std::vector<std::vector<int>> Cords) {
+    for (int i = 0 ; i < Cords.size ; i++) {
+        Board[Cords[i][0]][Cords[i][1]].Dropping = false; 
+    }
+
+    return;
+}

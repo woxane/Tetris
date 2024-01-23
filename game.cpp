@@ -6,7 +6,7 @@ void Play(Game game) {
     int DeltaTime = 1000000 / game.FPS;
     
     while (!game.GameOver) {
-        Draw(game.Board); 
+        Draw(game.Board);
 
         if (game.NewShape) {
             int ShapeType = RandomShape(); 
@@ -32,6 +32,7 @@ void Play(Game game) {
         COUNT++;
 
     }
+    std::cout << std::endl << "HEH YOU FUCKING LOSER YOU LOST";
 }
 
 
@@ -74,14 +75,14 @@ void Drop(Block Board[20][10] , bool& CannotMove , bool& NewShape) {
         if (MainCords[i][0] + 1 > 19 ) {
             CannotMove = true ; 
             NewShape= true;
-            Board[MainCords[i][0]][MainCords[i][1]].Dropping = false ; 
+            BlockFall(Board , Cords);
             return ; 
         }
 
         if (Board[MainCords[i][0] + 1][MainCords[i][1]].Shape != 0) {
             CannotMove = true; 
             NewShape = true;
-            Board[MainCords[i][0]][MainCords[i][1]].Dropping = false ; 
+            BlockFall(Board , Cords);
             return; 
         }
     } 
@@ -135,7 +136,7 @@ void AddShape(Block Board[20][10] , int ShapeType , bool& GameOver , std::vector
 
 
 void BlockFall(Block Board[20][10] , std::vector<std::vector<int>> Cords) {
-    for (int i = 0 ; i < Cords.size ; i++) {
+    for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0]][Cords[i][1]].Dropping = false; 
     }
 

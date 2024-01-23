@@ -17,6 +17,10 @@ struct Game {
     bool CannotMove = false; 
     bool NewShape = true;
     bool GameOver = false;
+    // Note : The diffrence between ShapeCords And  
+    // ShapeMainCords is that ShapeCords save all the Cordination of a Block  
+    // But ShapeMainCords just save those that important for Dropping a Block .
+    // Thats my solution for checking of a Block could drop or not .
     std::vector<std::vector<std::vector<int>>> ShapeCords = {
         { // O Block 
             {0,4} , {0,5} , {1,4} , {1,5}
@@ -38,6 +42,30 @@ struct Game {
         },
         { // T Block
             {0,5} , {1,4} , {1,5} , {1,6}
+        }
+
+    };
+    std::vector<std::vector<std::vector<int>>> ShapeMainCords = {
+        { // O Block 
+            {1,4} , {1,5}
+        },
+        { // Long Block
+            {0,3} , {0,4} , {0,5} , {0,6}
+        },
+        { // L Block
+            {3,4} , {0,5}
+        },
+        { // J Block 
+            {0,4} , {3,5} 
+        },
+        { // Zag Block
+            {1,5} , {2,4} 
+        },
+        { // Zig Block 
+            {1,4} , {2,5} 
+        },
+        { // T Block
+            {1,4} , {1,5} , {1,6}
         }
 
     };

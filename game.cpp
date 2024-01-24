@@ -10,7 +10,7 @@ void Play(Game game) {
 
         if (game.NewShape) {
             int ShapeType = RandomShape(game.CurrentShape); 
-            AddShape(game.Board , ShapeType , game.GameOver , game.ShapeCords[ShapeType]); 
+            AddShape(game.Board , ShapeType , game.GameOver , game.ShapeCords[ShapeType - 1]); 
             game.CurrentShape = ShapeType;
 
             if (game.GameOver) {
@@ -117,7 +117,7 @@ int RandomShape(int CurrentShape) {
 
     // Prevent to generate repetative Shape
     while (Num == CurrentShape) {
-        int Num = Distr(gen); 
+        Num = Distr(gen); 
     }
 
     return Num ; 

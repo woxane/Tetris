@@ -6,8 +6,6 @@ void Play(Game game) {
     int DeltaTime = 1000000 / game.FPS;
     
     while (!game.GameOver) {
-        Draw(game.Board);
-
         if (game.NewShape) {
             int ShapeType = RandomShape(game.CurrentShape); 
             AddShape(game.Board , ShapeType , game.GameOver , game.ShapeCords[ShapeType - 1]); 
@@ -32,6 +30,7 @@ void Play(Game game) {
         CheckDeath(game.Board , game.GameOver); 
         COUNT++;
 
+        Draw(game.Board);
     }
     std::cout << std::endl << "HEH YOU FUCKING LOSER YOU LOST";
 }

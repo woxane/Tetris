@@ -39,3 +39,7 @@ bool Compare(const std::vector<int>& a, const std::vector<int>& b) {
 bool MoveRightCompare(const std::vector<int>& a, const std::vector<int>& b) {
 	return a[1] > b[1];
 }
+
+bool MoveLeftCompare(const std::vector<int>& a, const std::vector<int>& b) {
+	return a[1] < b[1];
+}

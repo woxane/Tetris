@@ -78,6 +78,7 @@ struct Game {
 char Getch();
 void Cls();
 bool Compare(const std::vector<int>& a, const std::vector<int>& b);
+bool MoveRightCompare(const std::vector<int>& a, const std::vector<int>& b);
 
 // game.cpp Part : 
 void Play(Game game);
@@ -87,7 +88,7 @@ void CheckDeath(Block Board[18][10] , bool& GameOver);
 int RandomShape(int CurrentShape);
 void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords);
 void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords);
-bool MoveRightCompare(const std::vector<int>& a, const std::vector<int>& b);
+void MoveRight(Block Board[18][10] , bool& CannotMove , bool& NewShape);
 
 // screen.cpp Part :
 void Draw(Block Board[18][10]); 

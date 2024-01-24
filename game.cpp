@@ -3,14 +3,13 @@
 void Play(Game game) { 
     int COUNT = 1; 
     // In Micorseconds : 
-    int DeltaTime = 100000 / game.FPS;
+    int DeltaTime = 1000000 / game.FPS;
     
     while (!game.GameOver) {
         Draw(game.Board);
 
         if (game.NewShape) {
             int ShapeType = RandomShape(game.CurrentShape); 
-            std::cout << ShapeType;
             AddShape(game.Board , ShapeType , game.GameOver , game.ShapeCords[ShapeType - 1]); 
             game.CurrentShape = ShapeType;
 
@@ -38,7 +37,7 @@ void Play(Game game) {
 }
 
 
-std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> DroppingBlock(Block Board[20][10]) {
+std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> DroppingBlock(Block Board[18][10]) {
     std::vector<std::vector<int>> Cords; 
     for (int Col = 0 ; Col < 18 ; Col++) {
         for (int Row = 0 ; Row < 10 ; Row++) {
@@ -51,7 +50,7 @@ std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Droppin
     // MainCords are cordination that is important for drop 
     std::vector<std::vector<int>> MainCords; 
     for (int Row = 0 ; Row < 10 ; Row++) {
-        for (int Col = 19 ; Col >= 0 ; Col--) {
+        for (int Col = 17 ; Col >= 0 ; Col--) {
             if (Board[Col][Row].Dropping) {
                 std::vector<int> Cord = {Col , Row};
                 MainCords.push_back(Cord); 
@@ -66,7 +65,7 @@ std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Droppin
     return {MainCords , Cords};       
 }
 
-void Drop(Block Board[20][10] , bool& CannotMove , bool& NewShape) {
+void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
     std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Data = DroppingBlock(Board);
     std::vector<std::vector<int> > Cords = Data.second; 
     std::vector<std::vector<int> > MainCords = Data.first;  
@@ -74,7 +73,7 @@ void Drop(Block Board[20][10] , bool& CannotMove , bool& NewShape) {
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape; 
 
     for (int i = 0 ; i < MainCords.size() ; i++) {
-        if (MainCords[i][0] + 1 > 19 ) {
+        if (MainCords[i][0] + 1 > 17 ) {
             CannotMove = true ; 
             NewShape= true;
             BlockFall(Board , Cords);
@@ -98,7 +97,7 @@ void Drop(Block Board[20][10] , bool& CannotMove , bool& NewShape) {
 }
 
 
-void CheckDeath(Block Board[20][10] , bool& GameOver) {
+void CheckDeath(Block Board[18][10] , bool& GameOver) {
     for (int Row = 0 ; Row < 10 ; Row++) {
         if (Board[0][Row].Dropping == false & Board[0][Row].Shape != 0 ) {
             GameOver = true;
@@ -125,7 +124,7 @@ int RandomShape(int CurrentShape) {
 }
 
 
-void AddShape(Block Board[20][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords) {
+void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords) {
     for (int i = 0 ; i < BlockCords.size() ; i++) {
         if (Board[BlockCords[i][0]][BlockCords[i][1]].Shape != 0) {
             GameOver = true;
@@ -142,7 +141,7 @@ void AddShape(Block Board[20][10] , int ShapeType , bool& GameOver , std::vector
 }
 
 
-void BlockFall(Block Board[20][10] , std::vector<std::vector<int>> Cords) {
+void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords) {
     for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0]][Cords[i][1]].Dropping = false; 
     }

@@ -27,10 +27,12 @@ void Play(Game game) {
 
         usleep(DeltaTime); 
         Cls();
-        CheckDeath(game.Board , game.GameOver); 
         COUNT++;
-
         Draw(game.Board);
+
+        if (game.CannotMove) {
+            CheckDeath(game.Board , game.GameOver); 
+        }
     }
     std::cout << std::endl << "HEH YOU FUCKING LOSER YOU LOST";
 }
@@ -146,4 +148,42 @@ void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords) {
     }
 
     return;
+}
+
+
+void MoveRight(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
+    std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Data = DroppingBlock(Board); 
+    std::vector<std::vector<int> > Cords = Data.second; 
+    int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
+    
+    std::sort(Cords.begin() , Cords.end() , MoveRightCompare);
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
+        if (Cords[i][1] + 1 > 9 ) {
+            CannotMove = true;
+            NewShape = true; 
+            BlockFall(Board , Cords);
+            return;
+
+        }
+
+        if (Board[Cords[i][0]][Cords[i][1] + 1].Shape != 0 & Board[Cords[i][0]][Cords[i][1] + 1].Dropping == true) {
+            continue;
+
+        } else if (Board[Cords[i][0]][Cords[i][1] + 1].Shape != 0) {
+            CannotMove = true;
+            NewShape = true;
+            BlockFall(Board , Cords);
+            return; 
+
+        }
+    }
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
+        Board[Cords[i][0]][Cords[i][1]].Shape = 0; 
+        Board[Cords[i][0]][Cords[i][1]].Dropping = false; 
+        Board[Cords[i][0]][Cords[i][1] + 1].Shape = Shape; 
+        Board[Cords[i][0]][Cords[i][1] + 1].Dropping = true;
+    }
+
 }

@@ -1,6 +1,6 @@
 #include "tetris.hpp"
 
-void Draw(Block Board[20][10]) {
+void Draw(Block Board[18][10]) {
     for (int Col = 0 ; Col < 20 ; Col++) {
         for (int Row = 0 ; Row < 12 ; Row++) {
             if (Col == 0) {

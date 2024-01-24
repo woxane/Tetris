@@ -2,30 +2,22 @@
 
 
 char Getch() {
-	char buf = 0;
-	struct termios old = {0};
+    struct termios original, modified;
+    tcgetattr(STDIN_FILENO, &original);
 
-	if (tcgetattr(0, &old) < 0)
-		perror("tcsetattr()");
+    modified = original;
+    modified.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &modified);
 
-	old.c_lflag &= ~ICANON;
-	old.c_lflag &= ~ECHO;
-	old.c_cc[VMIN] = 1;
-	old.c_cc[VTIME] = 0;
+    char ch;
+    if (read(STDIN_FILENO, &ch, sizeof(ch)) != -1) {
+        std::cin.ignore(std::cin.rdbuf()->in_avail());
+        return ch;
+    }
 
-	if (tcsetattr(0, TCSANOW, &old) < 0)
-		perror("tcsetattr ICANON");
+    tcsetattr(STDIN_FILENO, TCSANOW, &original);
 
-	if (read(0, &buf, 1) < 0)
-		perror("read()");
-
-	old.c_lflag |= ICANON;
-	old.c_lflag |= ECHO;
-
-	if (tcsetattr(0, TCSADRAIN, &old) < 0)
-		perror ("tcsetattr ~ICANON");
-
-	return buf;
+    return '\0';
 }
 
 void Cls() {

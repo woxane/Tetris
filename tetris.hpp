@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <algorithm>
 #include <random>
+#include <termios.h>
 
 
 struct Block {

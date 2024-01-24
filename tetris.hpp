@@ -79,6 +79,7 @@ char Getch();
 void Cls();
 bool Compare(const std::vector<int>& a, const std::vector<int>& b);
 bool MoveRightCompare(const std::vector<int>& a, const std::vector<int>& b);
+bool MoveLeftCompare(const std::vector<int>& a, const std::vector<int>& b);
 
 // game.cpp Part : 
 void Play(Game game);

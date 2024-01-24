@@ -77,7 +77,7 @@ struct Game {
 // utils.cpp Part : 
 char Getch();
 void Cls();
-bool Compare(const std::vector<int>& a, const std::vector<int>& b);
+bool MoveDownCompare(const std::vector<int>& a, const std::vector<int>& b);
 bool MoveRightCompare(const std::vector<int>& a, const std::vector<int>& b);
 bool MoveLeftCompare(const std::vector<int>& a, const std::vector<int>& b);
 

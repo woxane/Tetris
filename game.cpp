@@ -60,8 +60,8 @@ std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Droppin
         }
     }
 
-    std::sort(Cords.begin() , Cords.end() , Compare);
-    std::sort(MainCords.begin() , MainCords.end() , Compare);
+    std::sort(Cords.begin() , Cords.end() , MoveDownCompare);
+    std::sort(MainCords.begin() , MainCords.end() , MoveDownCompare);
 
     return {MainCords , Cords};       
 }

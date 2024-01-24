@@ -185,5 +185,41 @@ void MoveRight(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
         Board[Cords[i][0]][Cords[i][1] + 1].Shape = Shape; 
         Board[Cords[i][0]][Cords[i][1] + 1].Dropping = true;
     }
+}
 
+
+void MoveLeft(Block Board[18][10] , bool& CannotMove , bool& NewShape){
+    std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> Data = DroppingBlock(Board); 
+    std::vector<std::vector<int> > Cords = Data.second; 
+    int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
+    
+    std::sort(Cords.begin() , Cords.end() , MoveLeftCompare);
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
+        if (Cords[i][1] - 1 < 0) {
+            CannotMove = true;
+            NewShape = true; 
+            BlockFall(Board , Cords);
+            return;
+
+        }
+
+        if (Board[Cords[i][0]][Cords[i][1] - 1].Shape != 0 & Board[Cords[i][0]][Cords[i][1] - 1].Dropping == true) {
+            continue;
+
+        } else if (Board[Cords[i][0]][Cords[i][1] - 1].Shape != 0) {
+            CannotMove = true;
+            NewShape = true;
+            BlockFall(Board , Cords);
+            return; 
+
+        }
+    }
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
+        Board[Cords[i][0]][Cords[i][1]].Shape = 0; 
+        Board[Cords[i][0]][Cords[i][1]].Dropping = false; 
+        Board[Cords[i][0]][Cords[i][1] - 1].Shape = Shape; 
+        Board[Cords[i][0]][Cords[i][1] - 1].Dropping = true;
+    }
 }

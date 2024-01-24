@@ -9,8 +9,9 @@ void Play(Game game) {
         Draw(game.Board);
 
         if (game.NewShape) {
-            int ShapeType = RandomShape(); 
+            int ShapeType = RandomShape(game.CurrentShape); 
             AddShape(game.Board , ShapeType , game.GameOver , game.ShapeCords[ShapeType]); 
+            game.CurrentShape = ShapeType;
 
             if (game.GameOver) {
                 break;

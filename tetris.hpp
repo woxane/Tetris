@@ -17,6 +17,7 @@ struct Game {
     bool CannotMove = false; 
     bool NewShape = true;
     bool GameOver = false;
+    int CurrentShape = 0;
     // Note : The diffrence between ShapeCords And  
     // ShapeMainCords is that ShapeCords save all the Cordination of a Block  
     // But ShapeMainCords just save those that important for Dropping a Block .

@@ -87,6 +87,7 @@ void CheckDeath(Block Board[18][10] , bool& GameOver);
 int RandomShape(int CurrentShape);
 void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords);
 void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords);
+bool MoveRightCompare(const std::vector<int>& a, const std::vector<int>& b);
 
 // screen.cpp Part :
 void Draw(Block Board[18][10]); 

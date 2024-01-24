@@ -46,30 +46,6 @@ struct Game {
         }
 
     };
-    std::vector<std::vector<std::vector<int>>> ShapeMainCords = {
-        { // O Block 
-            {1,4} , {1,5}
-        },
-        { // Long Block
-            {0,3} , {0,4} , {0,5} , {0,6}
-        },
-        { // L Block
-            {3,4} , {0,5}
-        },
-        { // J Block 
-            {0,4} , {3,5} 
-        },
-        { // Zag Block
-            {1,5} , {2,4} 
-        },
-        { // Zig Block 
-            {1,4} , {2,5} 
-        },
-        { // T Block
-            {1,4} , {1,5} , {1,6}
-        }
-
-    };
     Block Board[18][10];
 
 };
@@ -83,7 +59,7 @@ bool MoveLeftCompare(const std::vector<int>& a, const std::vector<int>& b);
 
 // game.cpp Part : 
 void Play(Game game);
-std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> DroppingBlock(Block Board[18][10]);
+std::vector<std::vector<int>> DroppingBlock(Block Board[18][10]);
 void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape);
 void CheckDeath(Block Board[18][10] , bool& GameOver);
 int RandomShape(int CurrentShape);

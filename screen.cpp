@@ -1,13 +1,13 @@
 #include "tetris.hpp"
 
 void Draw(Block Board[20][10]) {
-    for (int Col = 0 ; Col < 22 ; Col++) {
+    for (int Col = 0 ; Col < 20 ; Col++) {
         for (int Row = 0 ; Row < 12 ; Row++) {
             if (Col == 0) {
                 std::cout << "┏━━━━━woxane/tetris━━┓";
                 break; 
 
-            } else if (Col == 21) {
+            } else if (Col == 19) {
                 std::cout << "┗━━━━━━━━━━━━━━━━━━━━┛";
                 break; 
 

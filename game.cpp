@@ -3,13 +3,14 @@
 void Play(Game game) { 
     int COUNT = 1; 
     // In Micorseconds : 
-    int DeltaTime = 1000000 / game.FPS;
+    int DeltaTime = 100000 / game.FPS;
     
     while (!game.GameOver) {
         Draw(game.Board);
 
         if (game.NewShape) {
             int ShapeType = RandomShape(game.CurrentShape); 
+            std::cout << ShapeType;
             AddShape(game.Board , ShapeType , game.GameOver , game.ShapeCords[ShapeType - 1]); 
             game.CurrentShape = ShapeType;
 
@@ -39,7 +40,7 @@ void Play(Game game) {
 
 std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> DroppingBlock(Block Board[20][10]) {
     std::vector<std::vector<int>> Cords; 
-    for (int Col = 0 ; Col < 20 ; Col++) {
+    for (int Col = 0 ; Col < 18 ; Col++) {
         for (int Row = 0 ; Row < 10 ; Row++) {
              if (Board[Col][Row].Dropping) {
                  std::vector<int> Cord = {Col , Row};

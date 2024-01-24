@@ -83,7 +83,7 @@ void Play(Game game);
 std::pair<std::vector<std::vector<int>> , std::vector<std::vector<int>>> DroppingBlock(Block Board[20][10]);
 void Drop(Block Board[20][10] , bool& CannotMove , bool& NewShape);
 void CheckDeath(Block Board[20][10] , bool& GameOver);
-int RandomShape();
+int RandomShape(int CurrentShape);
 void AddShape(Block Board[20][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords);
 void BlockFall(Block Board[20][10] , std::vector<std::vector<int>> Cords);
 

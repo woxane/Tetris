@@ -8,6 +8,7 @@
 #include <cmath>
 #include <ncurses.h>
 #include <cstring>
+#include <cctype>
 
 
 struct Block {
@@ -78,3 +79,4 @@ void ShiftDown(Block Board[18][10] , int Row);
 void Draw(Block Board[18][10]); 
 int Menu();
 int Level();
+std::string Nickname();

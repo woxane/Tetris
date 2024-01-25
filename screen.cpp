@@ -162,3 +162,62 @@ int Level() {
     endwin();
     return currentOption;
 }
+
+
+std::string Nickname() {
+    initscr();
+    raw();
+    keypad(stdscr, TRUE);
+
+    int maxY, maxX;
+    getmaxyx(stdscr, maxY, maxX);
+
+    int boxHeight = 5;
+    int boxWidth = 30;
+    int boxStartY = (maxY - boxHeight) / 2;
+    int boxStartX = (maxX - boxWidth) / 2;
+
+    char nickname[30];
+    memset(nickname, 0, sizeof(nickname));
+
+    int ch;
+    int cursorPosition = 0;
+    bool editing = true;
+
+    while (editing) {
+        clear();
+
+        box(stdscr, 0, 0);
+        refresh();
+
+        mvprintw(boxStartY + 1, boxStartX + (boxWidth - strlen("Profile's Nickname:")) / 2, "Profile's Nickname:");
+
+        mvprintw(boxStartY + 2, boxStartX + (boxWidth - strlen(nickname)) / 2, "%s", nickname);
+
+        move(boxStartY + 2, boxStartX + (boxWidth - strlen(nickname)) / 2 + cursorPosition);
+
+        ch = getch();
+        switch (ch) {
+            case 10: 
+                editing = false;
+                break;
+
+            case 127:
+                if (cursorPosition > 0) {
+                    cursorPosition--;
+                    nickname[cursorPosition] = '\0';
+                }
+                break;
+
+            default:
+                if (std::isprint(ch) && cursorPosition < 29) {
+                    nickname[cursorPosition] = ch;
+                    cursorPosition++;
+                }
+                break;
+        }
+    }
+    
+    endwin();
+    return std::string(nickname);
+}

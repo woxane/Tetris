@@ -1,7 +1,7 @@
 # Makefile
 
 CXX = g++
-CXXFLAGS = -std=c++11
+CXXFLAGS = -std=c++11 -lncurses
 SRC_FILES = main.cpp game.cpp screen.cpp utils.cpp
 TARGET = tetris 
 

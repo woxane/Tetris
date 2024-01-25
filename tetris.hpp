@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <random>
 #include <termios.h>
+#include <fcntl.h>
 
 
 struct Block {

@@ -160,9 +160,7 @@ void MoveRight(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
 
     for (int i = 0 ; i < Cords.size() ; i++) {
         if (Cords[i][1] + 1 > 9 ) {
-            CannotMove = true;
-            NewShape = true; 
-            BlockFall(Board , Cords);
+            // beep sound
             return;
 
         }
@@ -196,9 +194,7 @@ void MoveLeft(Block Board[18][10] , bool& CannotMove , bool& NewShape){
 
     for (int i = 0 ; i < Cords.size() ; i++) {
         if (Cords[i][1] - 1 < 0) {
-            CannotMove = true;
-            NewShape = true; 
-            BlockFall(Board , Cords);
+            // beep sound
             return;
 
         }

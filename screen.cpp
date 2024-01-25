@@ -114,3 +114,51 @@ int Menu() {
     endwin();
     return 3;
 }
+
+
+int Level() {
+    initscr();
+    raw();
+    keypad(stdscr, TRUE);
+    noecho();
+
+    int maxRows, maxCols;
+    getmaxyx(stdscr, maxRows, maxCols);
+
+    const char* options[] = {"Noob" , "Beginner" , "Pro", "Hacker" , "GODD!"};
+    int currentOption = 0;
+
+    int boxHeight = 3;
+    int boxWidth = 15;
+    int boxStartY = (maxRows - boxHeight) / 2;
+    int boxStartX = (maxCols - boxWidth) / 2;
+
+    int ch;
+    do {
+        clear();
+
+        box(stdscr, 0, 0);
+        refresh();
+
+        mvprintw(boxStartY, boxStartX + (boxWidth - strlen("Level:")) / 2 - 3, "Level:");
+        refresh();
+
+        mvprintw(boxStartY + 1, boxStartX + (boxWidth - strlen(options[currentOption])) / 2, "< %s >", options[currentOption]);
+        refresh();
+
+        ch = getch();
+
+        switch (ch) {
+            case KEY_RIGHT:
+                currentOption = (currentOption + 1) % 3;
+                break;
+
+            case KEY_LEFT:
+                currentOption = (currentOption + 2) % 3;
+                break;
+        }
+
+    } while (ch != 10); 
+    endwin();
+    return currentOption;
+}

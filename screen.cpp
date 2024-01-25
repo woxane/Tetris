@@ -68,8 +68,8 @@ void Draw(Block Board[18][10]) {
 
 
 int Menu() {
-    initscr(); 
-    raw();     
+    initscr();
+    raw();
     keypad(stdscr, TRUE);
 
     int choice;
@@ -78,14 +78,22 @@ int Menu() {
     getmaxyx(stdscr, maxY, maxX);
     const char *options[] = {"New Game", "How To Play", "Leaderboard", "Exit"};
 
+    int boxHeight = 6;
+    int boxWidth = 20;
+    int boxStartY = (maxY - boxHeight) / 2;
+    int boxStartX = (maxX - boxWidth) / 2;
+
     while (true) {
         clear();
 
+        box(stdscr, 0, 0);
+        refresh();
+
         for (int i = 0; i < 4; i++) {
             if (i == highlight) {
-                attron(A_REVERSE); 
+                attron(A_REVERSE);
             }
-            mvprintw(maxY / 2 - 2 + i, maxX / 2 - std::strlen(options[i]) / 2, "%s", options[i]);
+            mvprintw(boxStartY + i + 1, boxStartX + (boxWidth - std::strlen(options[i])) / 2, "%s", options[i]);
             attroff(A_REVERSE);
         }
 
@@ -97,8 +105,8 @@ int Menu() {
             case KEY_DOWN:
                 highlight = (highlight + 1) % 4;
                 break;
-            case 10: 
-                endwin(); 
+            case 10:
+                endwin();
                 return highlight;
         }
     }

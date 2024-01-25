@@ -64,3 +64,45 @@ void Draw(Block Board[18][10]) {
         std::cout << std::endl ; 
     }
 }
+
+
+
+int Menu() {
+    initscr(); 
+    raw();     
+    keypad(stdscr, TRUE);
+
+    int choice;
+    int highlight = 0;
+    int maxY, maxX;
+    getmaxyx(stdscr, maxY, maxX);
+    const char *options[] = {"New Game", "How To Play", "Leaderboard", "Exit"};
+
+    while (true) {
+        clear();
+
+        for (int i = 0; i < 4; i++) {
+            if (i == highlight) {
+                attron(A_REVERSE); 
+            }
+            mvprintw(maxY / 2 - 2 + i, maxX / 2 - std::strlen(options[i]) / 2, "%s", options[i]);
+            attroff(A_REVERSE);
+        }
+
+        choice = getch();
+        switch (choice) {
+            case KEY_UP:
+                highlight = (highlight + 3) % 4;
+                break;
+            case KEY_DOWN:
+                highlight = (highlight + 1) % 4;
+                break;
+            case 10: 
+                endwin(); 
+                return highlight;
+        }
+    }
+
+    endwin();
+    return 3;
+}

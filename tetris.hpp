@@ -70,6 +70,7 @@ void MoveRight(Block Board[18][10] , bool& NewShape , int Pivot[2]);
 void MoveLeft(Block Board[18][10] , bool& NewShape , int Pivot[2]);
 void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]);
 void CompletedRows(Block Board[18][10]);
+void ShiftDown(Block Board[18][10] , int Row);
 
 // screen.cpp Part :
 void Draw(Block Board[18][10]); 

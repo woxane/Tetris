@@ -36,12 +36,16 @@ void Play(Game game) {
         } else if (ch == 'd') {
             MoveRight(game.Board , game.NewShape , game.Pivot);
 
+        } else if (ch == 'w') {
+            Rotate(game.Board , game.NewShape , game.Pivot);
+
         }
 
         usleep(DeltaTime); 
         Cls();
         COUNT++;
         Draw(game.Board);
+        CompletedRows(game.Board);
 
         if (game.CannotMove) {
             CheckDeath(game.Board , game.GameOver); 

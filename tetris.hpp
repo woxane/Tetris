@@ -69,6 +69,7 @@ void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords);
 void MoveRight(Block Board[18][10] , bool& NewShape , int Pivot[2]);
 void MoveLeft(Block Board[18][10] , bool& NewShape , int Pivot[2]);
 void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]);
+void CompletedRows(Block Board[18][10]);
 
 // screen.cpp Part :
 void Draw(Block Board[18][10]); 

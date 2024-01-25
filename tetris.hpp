@@ -5,6 +5,7 @@
 #include <random>
 #include <termios.h>
 #include <fcntl.h>
+#include <cmath>
 
 
 struct Block {
@@ -32,10 +33,10 @@ struct Game {
             {0,3} , {0,4} , {0,5} , {0,6}
         },
         { // L Block
-            {0,4} , {1,4} , {2,4} , {3,4} , {0,5}
+            {0,4} , {1,4} , {2,4} , {0,5}
         },
         { // J Block 
-            {0,4} , {0,5} , {1,5} , {2,5} , {3,5} 
+            {0,4} , {0,5} , {1,5} , {2,5} 
         },
         { // Zag Block
             {0,5} , {1,5} , {1,4} , {2,4} 
@@ -66,6 +67,7 @@ void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector
 void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords);
 void MoveRight(Block Board[18][10] , bool& NewShape);
 void MoveLeft(Block Board[18][10] , bool& NewShape);
+void Rotate(Block Board[18][10] , bool& NewShape);
 
 // screen.cpp Part :
 void Draw(Block Board[18][10]); 

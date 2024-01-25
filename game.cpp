@@ -69,8 +69,6 @@ void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape; 
 
-    std::sort(Cords.begin() , Cords.end() , MoveDownCompare);
-
     for (int i = 0 ; i < Cords.size() ; i++) {
         if (Cords[i][0] + 1 > 17 ) {
             CannotMove = true ; 
@@ -93,6 +91,9 @@ void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
     for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0]][Cords[i][1]].Shape = 0; 
         Board[Cords[i][0]][Cords[i][1]].Dropping = false; 
+    } 
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0] + 1][Cords[i][1]].Shape = Shape; 
         Board[Cords[i][0] + 1][Cords[i][1]].Dropping = true;
     }
@@ -156,8 +157,6 @@ void MoveRight(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     
-    std::sort(Cords.begin() , Cords.end() , MoveRightCompare);
-
     for (int i = 0 ; i < Cords.size() ; i++) {
         if (Cords[i][1] + 1 > 9 ) {
             // beep sound
@@ -179,7 +178,11 @@ void MoveRight(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
 
     for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0]][Cords[i][1]].Shape = 0; 
-        Board[Cords[i][0]][Cords[i][1]].Dropping = false; 
+        Board[Cords[i][0]][Cords[i][1]].Dropping = false;
+
+    }
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0]][Cords[i][1] + 1].Shape = Shape; 
         Board[Cords[i][0]][Cords[i][1] + 1].Dropping = true;
     }
@@ -190,8 +193,6 @@ void MoveLeft(Block Board[18][10] , bool& CannotMove , bool& NewShape){
     std::vector<std::vector<int> > Cords = DroppingBlock(Board); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     
-    std::sort(Cords.begin() , Cords.end() , MoveLeftCompare);
-
     for (int i = 0 ; i < Cords.size() ; i++) {
         if (Cords[i][1] - 1 < 0) {
             // beep sound
@@ -213,7 +214,10 @@ void MoveLeft(Block Board[18][10] , bool& CannotMove , bool& NewShape){
 
     for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0]][Cords[i][1]].Shape = 0; 
-        Board[Cords[i][0]][Cords[i][1]].Dropping = false; 
+        Board[Cords[i][0]][Cords[i][1]].Dropping = false;
+    } 
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0]][Cords[i][1] - 1].Shape = Shape; 
         Board[Cords[i][0]][Cords[i][1] - 1].Dropping = true;
     }

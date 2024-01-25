@@ -55,9 +55,6 @@ struct Game {
 // utils.cpp Part : 
 char Getch();
 void Cls();
-bool MoveDownCompare(const std::vector<int>& a, const std::vector<int>& b);
-bool MoveRightCompare(const std::vector<int>& a, const std::vector<int>& b);
-bool MoveLeftCompare(const std::vector<int>& a, const std::vector<int>& b);
 
 // game.cpp Part : 
 void Play(Game game);

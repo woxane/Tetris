@@ -27,15 +27,3 @@ char Getch() {
 void Cls() {
 	std::cout << "\033[2J\033[1;1H";
 }
-
-bool MoveDownCompare(const std::vector<int>& a, const std::vector<int>& b) {
-	return a[0] > b[0] ; 
-}
-
-bool MoveRightCompare(const std::vector<int>& a, const std::vector<int>& b) {
-	return a[1] > b[1];
-}
-
-bool MoveLeftCompare(const std::vector<int>& a, const std::vector<int>& b) {
-	return a[1] < b[1];
-}

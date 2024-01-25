@@ -230,3 +230,63 @@ void MoveLeft(Block Board[18][10] , bool& NewShape , int Pivot[2]){
     Pivot[1] -= 1;
 
 }
+
+
+void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]) {
+    std::vector<std::vector<int>> Cords = DroppingBlock(Board);
+    std::vector<std::vector<int>> RotatedCords;
+    int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
+    float XCenter = 0.0 , YCenter = 0.0;
+
+    if (Shape == 1 || Shape == 2) {
+        for (int i = 0 ; i < Cords.size() ; i++) {
+            XCenter += Cords[i][0];
+            YCenter += Cords[i][1];
+        }
+        XCenter /= Cords.size();
+        YCenter /= Cords.size();
+
+    } else {
+        XCenter = Pivot[0];
+        YCenter = Pivot[1];
+    }
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
+        float XO = Cords[i][0] - XCenter;
+        float YO = Cords[i][1] - YCenter;
+
+        int X = XCenter + YO;
+        int Y = YCenter - XO;
+
+        RotatedCords.push_back({X,Y});
+    }
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
+        if (RotatedCords[i][0] > 17 || RotatedCords[i][0] < 0) {
+            // beep sound
+            return;
+
+        } else if (RotatedCords[i][1] > 9 || RotatedCords[i][1] < 0) {
+            // beep sound
+            return;
+
+        } else if (Board[RotatedCords[i][0]][RotatedCords[i][1]].Shape != 0 & Board[RotatedCords[i][0]][RotatedCords[i][1]].Dropping == true) {
+            continue;
+
+        } else if (Board[RotatedCords[i][0]][RotatedCords[i][1]].Shape != 0) {
+            // beep sound
+            return;
+        }
+    }
+
+    for (int i = 0 ; i < Cords.size() ; i++) {
+        Board[Cords[i][0]][Cords[i][1]].Shape = 0; 
+        Board[Cords[i][0]][Cords[i][1]].Dropping = false;
+    } 
+
+    for (int i = 0 ; i < RotatedCords.size() ; i++) {
+        Board[RotatedCords[i][0]][RotatedCords[i][1]].Shape = Shape;
+        Board[RotatedCords[i][0]][RotatedCords[i][1]].Dropping = true;
+
+    }
+}

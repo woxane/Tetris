@@ -25,6 +25,19 @@ void Play(Game game) {
             Drop(game.Board , game.CannotMove , game.NewShape);
         }
 
+        char ch = Getch();
+        
+        if (ch == 's') {
+            Drop(game.Board , game.CannotMove , game.NewShape);
+
+        } else if (ch == 'a') {
+            MoveLeft(game.Board , game.CannotMove , game.NewShape);
+
+        } else if (ch == 'd') {
+            MoveRight(game.Board , game.CannotMove , game.NewShape);
+
+        }
+
         usleep(DeltaTime); 
         Cls();
         COUNT++;

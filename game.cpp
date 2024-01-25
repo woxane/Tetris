@@ -8,33 +8,33 @@ void Play(Game game) {
     while (!game.GameOver) {
         if (game.NewShape) {
             int ShapeType = RandomShape(game.CurrentShape); 
-            AddShape(game.Board , ShapeType , game.GameOver , game.ShapeCords[ShapeType - 1]); 
+            AddShape(game.Board , ShapeType , game.GameOver , game.ShapeCords[ShapeType - 1] , game.Pivot); 
             game.CurrentShape = ShapeType;
 
             if (game.GameOver) {
                 break;
             }
 
-            Drop(game.Board , game.CannotMove , game.NewShape);
+            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot);
             game.NewShape = false;  
         
         }
 
         // Level is gonna based on the number we mod with COUNT 
         if (COUNT % 10 == 0) {
-            Drop(game.Board , game.CannotMove , game.NewShape);
+            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot);
         }
 
         char ch = Getch();
         
         if (ch == 's') {
-            Drop(game.Board , game.CannotMove , game.NewShape);
+            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot);
 
         } else if (ch == 'a') {
-            MoveLeft(game.Board , game.NewShape);
+            MoveLeft(game.Board , game.NewShape , game.Pivot);
 
         } else if (ch == 'd') {
-            MoveRight(game.Board , game.NewShape);
+            MoveRight(game.Board , game.NewShape , game.Pivot);
 
         }
 
@@ -65,7 +65,7 @@ std::vector<std::vector<int>> DroppingBlock(Block Board[18][10]) {
     return Cords;       
 }
 
-void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
+void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2]) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape; 
 
@@ -97,6 +97,9 @@ void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
         Board[Cords[i][0] + 1][Cords[i][1]].Shape = Shape; 
         Board[Cords[i][0] + 1][Cords[i][1]].Dropping = true;
     }
+
+    Pivot[0] += 1;
+
 }
 
 
@@ -127,7 +130,7 @@ int RandomShape(int CurrentShape) {
 }
 
 
-void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords) {
+void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords , int Pivot[2]) {
     for (int i = 0 ; i < BlockCords.size() ; i++) {
         if (Board[BlockCords[i][0]][BlockCords[i][1]].Shape != 0) {
             GameOver = true;
@@ -140,6 +143,9 @@ void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector
         Board[BlockCords[i][0]][BlockCords[i][1]].Dropping = true;
     }
     
+    Pivot[0] = BlockCords[0][0];
+    Pivot[1] = BlockCords[0][1];
+
     return;
 }
 
@@ -153,7 +159,7 @@ void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords) {
 }
 
 
-void MoveRight(Block Board[18][10] , bool& NewShape) {
+void MoveRight(Block Board[18][10] , bool& NewShape , int Pivot[2]) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     
@@ -184,10 +190,13 @@ void MoveRight(Block Board[18][10] , bool& NewShape) {
         Board[Cords[i][0]][Cords[i][1] + 1].Shape = Shape; 
         Board[Cords[i][0]][Cords[i][1] + 1].Dropping = true;
     }
+
+    Pivot[1] += 1;
+
 }
 
 
-void MoveLeft(Block Board[18][10] , bool& NewShape){
+void MoveLeft(Block Board[18][10] , bool& NewShape , int Pivot[2]){
     std::vector<std::vector<int> > Cords = DroppingBlock(Board); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     
@@ -217,4 +226,7 @@ void MoveLeft(Block Board[18][10] , bool& NewShape){
         Board[Cords[i][0]][Cords[i][1] - 1].Shape = Shape; 
         Board[Cords[i][0]][Cords[i][1] - 1].Dropping = true;
     }
+
+    Pivot[1] -= 1;
+
 }

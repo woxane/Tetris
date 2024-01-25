@@ -21,6 +21,7 @@ struct Game {
     bool NewShape = true;
     bool GameOver = false;
     int CurrentShape = 0;
+    int Pivot[2] = {0,0};
     // Note : The diffrence between ShapeCords And  
     // ShapeMainCords is that ShapeCords save all the Cordination of a Block  
     // But ShapeMainCords just save those that important for Dropping a Block .
@@ -32,20 +33,20 @@ struct Game {
         { // Long Block
             {0,3} , {0,4} , {0,5} , {0,6}
         },
-        { // L Block
-            {0,4} , {1,4} , {2,4} , {0,5}
+        { // J Block
+            {1,4} , {0,4} , {0,5} , {2,4} 
         },
-        { // J Block 
-            {0,4} , {0,5} , {1,5} , {2,5} 
+        { // L Block 
+            {1,5} , {0,4} , {0,5} , {2,5} 
         },
         { // Zag Block
-            {0,5} , {1,5} , {1,4} , {2,4} 
+            {1,4} , {0,5} , {1,5} , {2,4} 
         },
         { // Zig Block 
-            {0,4} , {1,4} , {1,5} , {2,5} 
+            {1,4} , {0,4} , {1,5} , {2,5} 
         },
         { // T Block
-            {0,5} , {1,4} , {1,5} , {1,6}
+            {1,5} , {0,5} , {1,4} , {1,6}
         }
 
     };
@@ -60,14 +61,14 @@ void Cls();
 // game.cpp Part : 
 void Play(Game game);
 std::vector<std::vector<int>> DroppingBlock(Block Board[18][10]);
-void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape);
+void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2]);
 void CheckDeath(Block Board[18][10] , bool& GameOver);
 int RandomShape(int CurrentShape);
-void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords);
+void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords , int Pivot[2]);
 void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords);
-void MoveRight(Block Board[18][10] , bool& NewShape);
-void MoveLeft(Block Board[18][10] , bool& NewShape);
-void Rotate(Block Board[18][10] , bool& NewShape);
+void MoveRight(Block Board[18][10] , bool& NewShape , int Pivot[2]);
+void MoveLeft(Block Board[18][10] , bool& NewShape , int Pivot[2]);
+void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]);
 
 // screen.cpp Part :
 void Draw(Block Board[18][10]); 

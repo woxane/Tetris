@@ -31,10 +31,10 @@ void Play(Game game) {
             Drop(game.Board , game.CannotMove , game.NewShape);
 
         } else if (ch == 'a') {
-            MoveLeft(game.Board , game.CannotMove , game.NewShape);
+            MoveLeft(game.Board , game.NewShape);
 
         } else if (ch == 'd') {
-            MoveRight(game.Board , game.CannotMove , game.NewShape);
+            MoveRight(game.Board , game.NewShape);
 
         }
 
@@ -153,7 +153,7 @@ void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords) {
 }
 
 
-void MoveRight(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
+void MoveRight(Block Board[18][10] , bool& NewShape) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     
@@ -168,12 +168,10 @@ void MoveRight(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
             continue;
 
         } else if (Board[Cords[i][0]][Cords[i][1] + 1].Shape != 0) {
-            CannotMove = true;
-            NewShape = true;
-            BlockFall(Board , Cords);
-            return; 
+            // beep sound
+            return;
 
-        }
+        } 
     }
 
     for (int i = 0 ; i < Cords.size() ; i++) {
@@ -189,7 +187,7 @@ void MoveRight(Block Board[18][10] , bool& CannotMove , bool& NewShape) {
 }
 
 
-void MoveLeft(Block Board[18][10] , bool& CannotMove , bool& NewShape){
+void MoveLeft(Block Board[18][10] , bool& NewShape){
     std::vector<std::vector<int> > Cords = DroppingBlock(Board); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     
@@ -204,9 +202,7 @@ void MoveLeft(Block Board[18][10] , bool& CannotMove , bool& NewShape){
             continue;
 
         } else if (Board[Cords[i][0]][Cords[i][1] - 1].Shape != 0) {
-            CannotMove = true;
-            NewShape = true;
-            BlockFall(Board , Cords);
+            // beep sound
             return; 
 
         }

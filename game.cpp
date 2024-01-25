@@ -297,6 +297,8 @@ void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]) {
 
 
 void CompletedRows(Block Board[18][10]) {
+    std::vector<int> Rows; 
+
     for (int i = 0 ; i < 18 ; i++) {
         bool Completed = true;
         for (int j = 0 ; j < 10 ; j++) {
@@ -309,6 +311,27 @@ void CompletedRows(Block Board[18][10]) {
             for (int j = 0 ; j < 10 ; j++) {
                 Board[i][j].Shape = 0;
             }
+
+            Rows.push_back(i);
         }
     }
+    Cls();
+    Draw(Board);
+    
+    for (int i = 0 ; i < Rows.size() ; i++) {
+        std::cout << Rows[i] ; 
+        ShiftDown(Board , Rows[i]);
+
+    }
+
 }
+
+
+void ShiftDown(Block Board[18][10] , int Row) {
+    for (int i = Row ; i > 0 ; i--) {
+        for (int j = 0 ; j < 10 ; j++) {
+            Board[i][j].Shape = Board[i - 1][j].Shape;
+            Board[i][j].Dropping = Board[i - 1][j].Dropping;
+        }
+    }
+} 

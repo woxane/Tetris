@@ -77,3 +77,4 @@ void ShiftDown(Block Board[18][10] , int Row);
 // screen.cpp Part :
 void Draw(Block Board[18][10]); 
 int Menu();
+int Level();

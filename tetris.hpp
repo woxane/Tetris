@@ -9,6 +9,7 @@
 #include <ncurses.h>
 #include <cstring>
 #include <cctype>
+#include <iomanip>
 
 
 struct Block {
@@ -27,7 +28,7 @@ struct Game {
     int NextShape = 0;
     int Pivot[2] = {0,0};
     int Score = 0;
-    int ElapsedTime = 0;
+    long long int ElapsedTime = 0;
     // Note : The diffrence between ShapeCords And  
     // ShapeMainCords is that ShapeCords save all the Cordination of a Block  
     // But ShapeMainCords just save those that important for Dropping a Block .
@@ -63,6 +64,7 @@ struct Game {
 // utils.cpp Part : 
 char Getch();
 void Cls();
+std::string ConvertTime(long long int ElapsedTime);
 
 // game.cpp Part : 
 void Play(Game game);

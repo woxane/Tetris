@@ -134,6 +134,10 @@ void RandomShape(int& CurrentShape , int& NextShape , bool FirstTime) {
         RandomShape(CurrentShape , NextShape , 1);
 
     } else if (FirstTime) {
+        while (Num == CurrentShape) {
+            Num = Distr(gen);
+        }
+
         NextShape = Num;
     } else {
         CurrentShape = NextShape; 

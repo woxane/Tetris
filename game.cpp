@@ -335,3 +335,13 @@ void ShiftDown(Block Board[18][10] , int Row) {
         }
     }
 } 
+
+// Calculate Score based on NES Scoring : 
+// X[n]=X[n-1]*(2+2^(n-3))​
+int CalculateScore(int Nth) {
+    if (Nth == 1) {
+        return 40;
+    }
+
+    return CalculateScore(Nth - 1) * (2 + std::pow(2, Nth - 3));
+}

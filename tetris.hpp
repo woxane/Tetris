@@ -74,7 +74,7 @@ void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords , int& 
 void MoveRight(Block Board[18][10] , bool& NewShape , int Pivot[2]);
 void MoveLeft(Block Board[18][10] , bool& NewShape , int Pivot[2]);
 void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]);
-void CompletedRows(Block Board[18][10] , int& Score);
+void CompletedRows(Block Board[18][10] , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords);
 void ShiftDown(Block Board[18][10] , int Row);
 int CalculateScore(int Nth);
 

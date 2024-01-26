@@ -492,3 +492,64 @@ int Pause() {
     return choice;
 
 }
+
+
+std::string TetrisSize () {
+    initscr();
+    cbreak();
+    noecho();
+
+    int maxY, maxX;
+    getmaxyx(stdscr, maxY, maxX);
+    char* Msg = "Enter height and width (e.g., 20 10) : ";
+    int col = (maxX - strlen(Msg)) / 2;
+
+    char userInput[10];
+    memset(userInput , 0 , sizeof(userInput));
+
+    int ch; 
+    int cursorPosition = 0;
+    bool editing = true;
+
+    while (editing) {
+        clear();
+        box(stdscr, 0, 0);
+        refresh();
+
+        mvprintw(maxY / 2 + 2, col, Msg );
+        mvprintw(maxY / 2 + 4, col, "> ");
+
+        mvprintw(maxY / 2 + 4 , col + 5 , "%s", userInput);
+
+        move(maxY / 2 + 4 , col + 5 + cursorPosition );
+
+        ch = getch();
+        switch (ch) {
+            case 10: 
+                editing = false;
+                break;
+
+            case 127:
+                if (cursorPosition > 0) {
+                    cursorPosition--;
+                    userInput[cursorPosition] = '\0';
+                }
+                break;
+
+            default:
+                if (std::isprint(ch) && cursorPosition < 29) {
+                    userInput[cursorPosition] = ch;
+                    cursorPosition++;
+                }
+                break;
+        }
+
+    }
+
+
+
+    endwin(); // End the library
+
+    return std::string(userInput);
+
+}

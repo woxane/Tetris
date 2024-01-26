@@ -50,7 +50,16 @@ int main() {
 				break;
 
 			case 2 : 
-				std::cout << "How to play";
+				std::cout << "-KeyBinds : " << std::endl;
+				std::cout << "-- 1) You could move right and left with d and a key . " << std::endl;
+				std::cout << "-- 2) You could move down faster using s key ." << std::endl;
+				std::cout << "-- 3) You could rotate your block using w key . " << std::endl;
+				std::cout << "-- 4) You could fall your block using space key . " << std::endl; 
+				std::cout << "-Game Flow : " << std::endl;
+				std::cout << " -- 1) You must know that there are 5 types of level in this game : " << std::endl;
+				std::cout << "---- Noob  ,  Beginner , Pro  ,  Hacker  ,  GODD ." << std::endl;
+				std::cout << "-- 2) In the Noob level gaming you have ghost block to help your aim ." << std::endl;
+				return 0;
 				// How To play 
 				break;
 
@@ -62,7 +71,6 @@ int main() {
 
 			case 4 : 
 				// Exit
-				std::cout << "FUc";
 				return 0;
 				break;
 

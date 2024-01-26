@@ -77,7 +77,8 @@ struct LB {
 char Getch();
 void Cls();
 std::string ConvertTime(long long int ElapsedTime);
-void LeaderBoardAdd(LB Data , int Level);
+void LeaderboardAdd(LB Data , int Level);
+std::vector<LB> LeaderboardRead(int Level);
 
 // game.cpp Part : 
 void Play(Game game);

@@ -79,3 +79,47 @@ void LeaderboardAdd(LB Data , int Level) {
 
 	return ;
 }
+
+
+std::vector<LB> LeaderboardRead(int Level) {
+    std::string FileName = "";
+
+    switch Level {
+        case 0 : 
+            FileName = "Noob.txt";
+            break;
+
+        case 1 : 
+            FileName = "Beginner.txt";
+            break;
+
+        case 2 : 
+            FileName = "Pro.txt";
+            break;
+
+        case 3 : 
+            FileName = "Hacker.txt";
+            break;
+        
+        case 4 :
+            FileName = "GOD.txt";
+            break;
+    }
+
+    std::ifstream Leaderboard(FileName);
+
+	if (!Leaderboard){
+        std::cerr << "FILE ERROR !";
+        return ;
+    } 
+
+    std::vector<LB> Data;
+    LB temp;
+
+    while (Leaderboard >> temp.Name >> temp.Score >> temp.ElapsedTime) {
+        Data.push_back(temp);
+    }
+
+    return Data;
+
+}

@@ -25,6 +25,7 @@ struct Game {
     bool GameOver = false;
     int CurrentShape = 0;
     int Pivot[2] = {0,0};
+    int Score = 0;
     // Note : The diffrence between ShapeCords And  
     // ShapeMainCords is that ShapeCords save all the Cordination of a Block  
     // But ShapeMainCords just save those that important for Dropping a Block .

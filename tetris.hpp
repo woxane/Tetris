@@ -11,6 +11,7 @@
 #include <cctype>
 #include <iomanip>
 #include <sstream>
+#include <fstream>
 
 
 struct Block {
@@ -76,6 +77,7 @@ struct LB {
 char Getch();
 void Cls();
 std::string ConvertTime(long long int ElapsedTime);
+void LeaderBoardAdd(LB Data , int Level);
 
 // game.cpp Part : 
 void Play(Game game);

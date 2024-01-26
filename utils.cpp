@@ -41,3 +41,40 @@ std::string ConvertTime(long long int ElapsedTime) {
 
     return Result.str();
 }
+
+
+void LeaderboardAdd(LB Data , int Level) {
+    std::string FileName = "";
+
+    switch Level {
+        case 0 : 
+            FileName = "Noob.txt";
+            break;
+
+        case 1 : 
+            FileName = "Beginner.txt";
+            break;
+
+        case 2 : 
+            FileName = "Pro.txt";
+            break;
+
+        case 3 : 
+            FileName = "Hacker.txt";
+            break;
+        
+        case 4 :
+            FileName = "GOD.txt"
+    }
+
+    std::ofstream Leaderboard(FileName , std::ios::app) ;
+
+	if (!Leaderboard){
+        std::cerr << "FILE ERROR !";
+        return ;
+    } 
+
+    Leaderboard << Data.Name << " " << Data.Score << " " << Data.ElapsedTime << '\n'; 
+
+	return ;
+}

@@ -348,3 +348,34 @@ std::string Nickname() {
     endwin();
     return std::string(nickname);
 }
+
+
+int GameOver() {
+    initscr();
+    raw();
+    keypad(stdscr, TRUE);
+
+    int maxRows, maxCols;
+    getmaxyx(stdscr, maxRows, maxCols);
+
+    int centerX = maxCols / 2;
+    int centerY = maxRows / 2;
+
+    box(stdscr, 0, 0);
+
+    mvprintw(centerY, centerX - 4, std::string("Game over!").c_str());
+    mvprintw(centerY + 1, centerX - 7, std::string("Try again? (y/n)").c_str());
+
+    int ch = getch();
+    endwin(); 
+
+    if (ch == 'y' || ch == 'Y') {
+        return 1;
+    } else if (ch == 'n' || ch == 'N') {
+        return 0;
+    } else {
+        return 0;
+    }
+
+
+}

@@ -29,7 +29,7 @@ void Play(Game game) {
         char ch = Getch();
         
         if (ch == 's') {
-            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score);
+            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , true);
 
         } else if (ch == 'a') {
             MoveLeft(game.Board , game.NewShape , game.Pivot);
@@ -71,7 +71,7 @@ std::vector<std::vector<int>> DroppingBlock(Block Board[18][10]) {
     return Cords;       
 }
 
-void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score) {
+void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , bool UserInput) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
 
     // When Neither we can have any New Shape or Move
@@ -86,7 +86,7 @@ void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2]
         if (Cords[i][0] + 1 > 17 ) {
             CannotMove = true ; 
             NewShape= true;
-            BlockFall(Board , Cords , Score);
+            BlockFall(Board , Cords);
             return ; 
         }
 
@@ -96,7 +96,7 @@ void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2]
         } else if (Board[Cords[i][0] + 1][Cords[i][1]].Shape != 0) {
             CannotMove = true; 
             NewShape = true;
-            BlockFall(Board , Cords , Score);
+            BlockFall(Board , Cords);
             return; 
         }
     } 
@@ -109,6 +109,10 @@ void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2]
     for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0] + 1][Cords[i][1]].Shape = Shape; 
         Board[Cords[i][0] + 1][Cords[i][1]].Dropping = true;
+    }
+
+    if (UserInput) {
+        Score++;
     }
 
     Pivot[0] += 1;
@@ -178,12 +182,11 @@ void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector
 }
 
 
-void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords , int& Score) {
+void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords) {
     for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0]][Cords[i][1]].Dropping = false; 
     }
 
-    Score += 16;
     return;
 }
 

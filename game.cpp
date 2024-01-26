@@ -47,7 +47,10 @@ void Play(Game game) {
         COUNT++;
         game.ElapsedTime += DeltaTime;
         Draw(game.Board , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.Score , game.ElapsedTime);
-        CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.ElapsedTime);
+
+        if (game.CannotMove) {
+            CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.ElapsedTime);
+        }
 
         if (game.CannotMove) {
             CheckDeath(game.Board , game.GameOver); 

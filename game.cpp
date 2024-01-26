@@ -45,6 +45,7 @@ void Play(Game game) {
         usleep(DeltaTime); 
         Cls();
         COUNT++;
+        game.ElapsedTime += DeltaTime;
         Draw(game.Board , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.Score);
         CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1]);
 

@@ -119,18 +119,18 @@ void CheckDeath(Block Board[18][10] , bool& GameOver) {
     return ; 
 }
 
-int RandomShape(int CurrentShape) {
+int RandomShape(int CurrentShape , int& NextShape) {
     std::random_device rd ; 
     std::mt19937 gen(rd()) ;
     std::uniform_int_distribution<int> Distr(1, 7); 
-    int Num = Distr(gen); 
+    int NextShape= Distr(gen); 
 
     // Prevent to generate repetative Shape
-    while (Num == CurrentShape) {
-        Num = Distr(gen); 
+    while (NextShape == CurrentShape) {
+        NextShape = Distr(gen); 
     }
 
-    return Num ; 
+    return; 
 }
 
 

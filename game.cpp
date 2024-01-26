@@ -15,6 +15,8 @@ void Play(Game game) {
             }
 
             Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score);
+
+            game.CannotMove = false;
             game.NewShape = false;  
         
         }

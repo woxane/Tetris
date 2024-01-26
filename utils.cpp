@@ -33,7 +33,11 @@ std::string ConvertTime(long long int ElapsedTime) {
     int Minutes = (ElapsedTime / 1000000) / 60;
     int Seconds = (ElapsedTime / 1000000) % 60;
     int MilliSeconds = (ElapsedTime / 1000) % 1000;
-    std::string Result =  std::to_string(minutes) + ":" + std::setw(2) + std::to_string(seconds) + ":" + std::setw(3) + std::to_string(milliseconds);
+    std::stringstream Result;
 
-    return Result;
+    Result << std::setfill('0') << std::setw(2) << Minutes << ":"
+           << std::setw(2) << Seconds << ":"
+           << std::setw(3) << MilliSeconds;
+
+    return Result.str();
 }

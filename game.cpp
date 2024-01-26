@@ -43,8 +43,8 @@ void Play(Game game) {
         usleep(DeltaTime); 
         Cls();
         COUNT++;
-        Draw(game.Board);
-        CompletedRows(game.Board , game.Score);
+        Draw(game.Board , game.NextShape , game.ShapeCords[game.NextShape - 1]);
+        CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1]);
 
         if (game.CannotMove) {
             CheckDeath(game.Board , game.GameOver); 
@@ -307,7 +307,7 @@ void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]) {
 }
 
 
-void CompletedRows(Block Board[18][10] , int& Score) {
+void CompletedRows(Block Board[18][10] , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords) {
     std::vector<int> Rows; 
     int NumberOfRows = 0;
 
@@ -333,7 +333,7 @@ void CompletedRows(Block Board[18][10] , int& Score) {
     Score += TotalScore;
 
     Cls();
-    Draw(Board);
+    Draw(Board , NextShape , NextShapeCords);
     
     for (int i = 0 ; i < Rows.size() ; i++) {
         std::cout << Rows[i] ; 

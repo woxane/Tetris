@@ -9,7 +9,10 @@
 #define ORANGE  "\033[38;2;255;165;0m"
 #define PURPLE  "\033[38;2;128;0;128m"
 
-void Draw(Block Board[18][10] , int NextShapeType , std::vector<std::vector<int>> NextShapeCords , int Score) {
+void Draw(Block Board[18][10] , int NextShapeType , std::vector<std::vector<int>> NextShapeCords , int Score , long long int ElapsedTime) {
+    std::string ConvertedTime = ConvertTime(ElapsedTime);
+    std::cout << "Elapsed Time : " << ConvertedTime << std::endl;
+
     for (int Col = 0 ; Col < 20 ; Col++) {
         for (int Row = 0 ; Row < 12 ; Row++) {
             if (Col == 0) {

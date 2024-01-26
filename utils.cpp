@@ -46,7 +46,7 @@ std::string ConvertTime(long long int ElapsedTime) {
 void LeaderboardAdd(LB Data , int Level) {
     std::string FileName = "";
 
-    switch Level {
+    switch (Level) {
         case 0 : 
             FileName = "Noob.txt";
             break;
@@ -70,11 +70,6 @@ void LeaderboardAdd(LB Data , int Level) {
 
     std::ofstream Leaderboard(FileName , std::ios::app) ;
 
-	if (!Leaderboard){
-        std::cerr << "FILE ERROR !";
-        return ;
-    } 
-
     Leaderboard << Data.Name << " " << Data.Score << " " << Data.ElapsedTime << '\n'; 
 
 	return ;
@@ -84,7 +79,7 @@ void LeaderboardAdd(LB Data , int Level) {
 std::vector<LB> LeaderboardRead(int Level) {
     std::string FileName = "";
 
-    switch Level {
+    switch (Level) {
         case 0 : 
             FileName = "Noob.txt";
             break;
@@ -104,14 +99,14 @@ std::vector<LB> LeaderboardRead(int Level) {
         case 4 :
             FileName = "GOD.txt";
             break;
+        default : 
+            FileName = "Noob.txt";
+            break;
+
     }
 
     std::ifstream Leaderboard(FileName);
 
-	if (!Leaderboard){
-        std::cerr << "FILE ERROR !";
-        return ;
-    } 
 
     std::vector<LB> Data;
     LB temp;
@@ -131,7 +126,7 @@ bool Compare(const LB& a, const LB& b) {
     if (a.Score == b.Score) {
         return a.ElapsedTime < b.ElapsedTime;
     } else {
-        return a.score > b.score;
+        return a.Score > b.Score;
     }
 
 }

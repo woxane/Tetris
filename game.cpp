@@ -18,12 +18,15 @@ void Play(Game game) {
 
             game.CannotMove = false;
             game.NewShape = false;  
-
-            GhostBlock(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth); 
+            
+            if (game.Level == 0) {
+                GhostBlock(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth); 
+            }
         }
 
-        // Level is gonna based on the number we mod with COUNT 
-        if (COUNT % 10 == 0) {
+        // Level is gonna based on the number we mod with COUNT
+        std::cout << game.Level ;
+        if (COUNT % (10 - 2 * game.Level) == 0) {
             Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth);
         }
 
@@ -47,7 +50,9 @@ void Play(Game game) {
             }
         }
 
-        GhostBlock(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth); 
+        if (game.Level == 0) {
+            GhostBlock(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth); 
+        }
 
         usleep(DeltaTime); 
         Cls();
@@ -63,7 +68,12 @@ void Play(Game game) {
             CheckDeath(game.Board , game.GameOver , game.BoardWidth); 
         }
     }
-    std::cout << std::endl << "HEH YOU FUCKING LOSER YOU LOST";
+    LB Data ; 
+    Data.Name = game.Name;
+    Data.Score = game.Score;
+    Data.ElapsedTime = game.ElapsedTime; 
+    LeaderboardAdd(Data , game.Level);
+
 }
 
 

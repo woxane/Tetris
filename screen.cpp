@@ -219,7 +219,7 @@ int Menu() {
         box(stdscr, 0, 0);
         refresh();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             if (i == highlight) {
                 attron(A_REVERSE);
             }
@@ -230,10 +230,10 @@ int Menu() {
         choice = getch();
         switch (choice) {
             case KEY_UP:
-                highlight = (highlight + 3) % 4;
+                highlight = (highlight + 3) % 5;
                 break;
             case KEY_DOWN:
-                highlight = (highlight + 1) % 4;
+                highlight = (highlight + 1) % 5;
                 break;
             case 10:
                 endwin();
@@ -242,7 +242,7 @@ int Menu() {
     }
 
     endwin();
-    return 3;
+    return 5;
 }
 
 
@@ -280,11 +280,11 @@ int Level() {
 
         switch (ch) {
             case KEY_RIGHT:
-                currentOption = (currentOption + 1) % 3;
+                currentOption = (currentOption + 1) % 5;
                 break;
 
             case KEY_LEFT:
-                currentOption = (currentOption + 2) % 3;
+                currentOption = (currentOption + 2) % 5;
                 break;
         }
 
@@ -396,11 +396,6 @@ void LeaderboardDraw(std::vector<LB> Leaderboard) {
     int box_height = Leaderboard.size() + 2;
     int box_width = 0;
 
-    for (size_t i = 0; i < Leaderboard.size(); ++i) {
-        int item_width = Leaderboard[i].first.length() + std::to_string(Leaderboard[i].second).length() + 3;
-        box_width = std::max(box_width, item_width);
-    }
-
     box_width += 2;
 
     int start_y = 0;
@@ -415,8 +410,8 @@ void LeaderboardDraw(std::vector<LB> Leaderboard) {
     int center_x = width / 2;
 
     for (size_t i = 0; i < Leaderboard.size(); ++i) {
-        mvwprintw(box_win, center_y - Leaderboard.size() / 2 + i, center_x - box_width / 2 + 1,
-                  "%d) %s %d", i + 1, Leaderboard[i].first.c_str(), Leaderboard[i].second);
+        mvwprintw(box_win, center_y - Leaderboard.size() / 2 + i , center_x - box_width / 2 - 10 ,
+                  "%d) %s %d %f", i + 1, Leaderboard[i].Name.c_str() , Leaderboard[i].Score , ConvertTime(Leaderboard[i].ElapsedTime).c_str());
     }
 
     wrefresh(box_win);

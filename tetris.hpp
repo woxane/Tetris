@@ -34,6 +34,8 @@ struct Game {
     long long int ElapsedTime = 0;
     int BoardWidth = 15;
     int BoardHeight = 24;
+    std::string Name = "";
+    int Level;
     // Note : The diffrence between ShapeCords And  
     // ShapeMainCords is that ShapeCords save all the Cordination of a Block  
     // But ShapeMainCords just save those that important for Dropping a Block .
@@ -106,3 +108,6 @@ int GameOver();
 void LeaderboardDraw(std::vector<LB> Leaderboard);
 int Pause();
 std::string TetrisSize ();
+
+// main.cpp part : 
+void NewGame();

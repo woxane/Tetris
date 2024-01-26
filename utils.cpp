@@ -123,3 +123,13 @@ std::vector<LB> LeaderboardRead(int Level) {
     return Data;
 
 }
+
+
+bool Compare(const LB& a, const LB& b) {
+    if (a.Score == b.Score) {
+        return a.ElapsedTime < b.ElapsedTime;
+    } else {
+        return a.score > b.score;
+    }
+
+}

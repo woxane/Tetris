@@ -79,6 +79,7 @@ void Cls();
 std::string ConvertTime(long long int ElapsedTime);
 void LeaderboardAdd(LB Data , int Level);
 std::vector<LB> LeaderboardRead(int Level);
+bool Compare(const LB& a, const LB& b);
 
 // game.cpp Part : 
 void Play(Game game);

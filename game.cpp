@@ -7,9 +7,8 @@ void Play(Game game) {
     
     while (!game.GameOver) {
         if (game.NewShape) {
-            int ShapeType = RandomShape(game.CurrentShape); 
-            AddShape(game.Board , ShapeType , game.GameOver , game.ShapeCords[ShapeType - 1] , game.Pivot); 
-            game.CurrentShape = ShapeType;
+            RandomShape(game.CurrentShape , game.NextShape); 
+            AddShape(game.Board , game.CurrentShape , game.GameOver , game.ShapeCords[game.CurrentShape - 1] , game.Pivot); 
 
             if (game.GameOver) {
                 break;
@@ -119,21 +118,23 @@ void CheckDeath(Block Board[18][10] , bool& GameOver) {
     return ; 
 }
 
-void RandomShape(int& CurrentShape , int& NextShape) {
+void RandomShape(int& CurrentShape , int& NextShape , bool FirstTime) {
     std::random_device rd ; 
     std::mt19937 gen(rd()) ;
     std::uniform_int_distribution<int> Distr(1, 7); 
     int Num = Distr(gen);
 
     // Prevent to generate repetative Shape
-    while (Num == CurrentShape) {
+    while (Num == NextShape) {
         Num = Distr(gen); 
     }
 
     if (CurrentShape == NextShape) {
         CurrentShape = Num;
-        RandomShape(CurrentShape , NextShape);
+        RandomShape(CurrentShape , NextShape , 1);
 
+    } else if (FirstTime) {
+        NextShape = Num;
     } else {
         CurrentShape = NextShape; 
         NextShape = Num;

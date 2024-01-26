@@ -9,21 +9,44 @@
 #define ORANGE  "\033[38;2;255;165;0m"
 #define PURPLE  "\033[38;2;128;0;128m"
 
-void Draw(std::vector<std::vector<Block>> Board , int NextShapeType , std::vector<std::vector<int>> NextShapeCords , int Score , long long int ElapsedTime) {
+void Draw(std::vector<std::vector<Block>> Board , int NextShapeType , std::vector<std::vector<int>> NextShapeCords , int Score , long long int ElapsedTime , int Height , int Width) {
     std::string ConvertedTime = ConvertTime(ElapsedTime);
     std::cout << "Elapsed Time : " << ConvertedTime << std::endl;
 
-    for (int Col = 0 ; Col < 20 ; Col++) {
-        for (int Row = 0 ; Row < 12 ; Row++) {
+    for (int Col = 0 ; Col < Height + 2 ; Col++) {
+        for (int Row = 0 ; Row < Width + 2; Row++) {
             if (Col == 0) {
-                std::cout << "┏━━━━━woxane/tetris━━┓";
+                std::string Name = "woxane/tetris";
+                std::string Head; 
+                int LeftLines =  (2*Width - Name.length() ) / 2;
+                int RightLines = 2*Width - LeftLines - Name.length();
+
+                Head += "┏";
+                for (int i = 0 ; i < LeftLines ; i++) {
+                    Head += "━";    
+                }
+                Head += Name;
+                for (int i = 0 ; i < RightLines ; i++) {
+                    Head += "━";    
+                }
+                Head += "┓";
+
+                std::cout << Head;
                 break; 
 
-            } else if (Col == 19) {
-                std::cout << "┗━━━━━━━━━━━━━━━━━━━━┛";
+            } else if (Col == Height + 1) {
+                std::string End; 
+
+                End += "┗";
+                for (int i = 0 ; i < 2*Width ; i++) {
+                    End += "━";
+                }
+                End += "┛";
+
+                std::cout << End;
                 break; 
 
-            } else if (Row == 0 || Row == 11) {
+            } else if (Row == 0 || Row == Width + 1) {
                 std::cout << "┃";
 
             } else if (Board[Col - 1][Row - 1].Shape != 0 ) {
@@ -63,8 +86,8 @@ void Draw(std::vector<std::vector<Block>> Board , int NextShapeType , std::vecto
                 std::cout << "  " ;  
 
             }
-
-            if (0 < Col & Col < 6 & Row == 11) {
+            // XXX
+            if (0 < Col & Col < 6 & Row == Width + 1) {
                 std::cout << "    ";
                 if (Col == 1) {
                     std::cout << "┏━━next━━━┓";
@@ -129,8 +152,8 @@ void Draw(std::vector<std::vector<Block>> Board , int NextShapeType , std::vecto
                 }
 
             }
-
-            if (5 < Col & Col < 11 & Row == 11) {
+            // XXX
+            if (5 < Col & Col < 11 & Row == Width + 1) {
                 std::cout << "    ";
                 if (Col == 6) {
                     std::cout << "┏━━score━━┓";

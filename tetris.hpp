@@ -24,6 +24,7 @@ struct Game {
     bool NewShape = true;
     bool GameOver = false;
     int CurrentShape = 0;
+    int NextShape = 0;
     int Pivot[2] = {0,0};
     int Score = 0;
     // Note : The diffrence between ShapeCords And  
@@ -67,7 +68,7 @@ void Play(Game game);
 std::vector<std::vector<int>> DroppingBlock(Block Board[18][10]);
 void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score);
 void CheckDeath(Block Board[18][10] , bool& GameOver);
-int RandomShape(int CurrentShape);
+int RandomShape(int CurrentShape , int& NextShape);
 void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords , int Pivot[2]);
 void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords , int& Score);
 void MoveRight(Block Board[18][10] , bool& NewShape , int Pivot[2]);

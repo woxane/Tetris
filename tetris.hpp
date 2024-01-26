@@ -65,15 +65,15 @@ void Cls();
 // game.cpp Part : 
 void Play(Game game);
 std::vector<std::vector<int>> DroppingBlock(Block Board[18][10]);
-void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2]);
+void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score);
 void CheckDeath(Block Board[18][10] , bool& GameOver);
 int RandomShape(int CurrentShape);
 void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords , int Pivot[2]);
-void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords);
+void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords , int& Score);
 void MoveRight(Block Board[18][10] , bool& NewShape , int Pivot[2]);
 void MoveLeft(Block Board[18][10] , bool& NewShape , int Pivot[2]);
 void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]);
-void CompletedRows(Block Board[18][10]);
+void CompletedRows(Block Board[18][10] , int& Score);
 void ShiftDown(Block Board[18][10] , int Row);
 int CalculateScore(int Nth);
 

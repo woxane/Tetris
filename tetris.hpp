@@ -65,6 +65,13 @@ struct Game {
 
 };
 
+//LB = Leaderboard
+struct LB {
+	std::string Name ;
+	int Score ;
+    long long ElapsedTime;
+} ;
+
 // utils.cpp Part : 
 char Getch();
 void Cls();

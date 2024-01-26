@@ -382,3 +382,48 @@ int GameOver() {
 
 
 }
+
+
+void LeaderboardDraw(std::vector<LB> Leaderboard) {
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+
+    int height, width;
+    getmaxyx(stdscr, height, width);
+
+    int box_height = Leaderboard.size() + 2;
+    int box_width = 0;
+
+    for (size_t i = 0; i < Leaderboard.size(); ++i) {
+        int item_width = Leaderboard[i].first.length() + std::to_string(Leaderboard[i].second).length() + 3;
+        box_width = std::max(box_width, item_width);
+    }
+
+    box_width += 2;
+
+    int start_y = 0;
+    int start_x = 0;
+
+    WINDOW* box_win = newwin(height, width, start_y, start_x);
+
+    box(box_win, 0, 0);
+    wrefresh(box_win);
+
+    int center_y = height / 2;
+    int center_x = width / 2;
+
+    for (size_t i = 0; i < Leaderboard.size(); ++i) {
+        mvwprintw(box_win, center_y - Leaderboard.size() / 2 + i, center_x - box_width / 2 + 1,
+                  "%d) %s %d", i + 1, Leaderboard[i].first.c_str(), Leaderboard[i].second);
+    }
+
+    wrefresh(box_win);
+
+    getch();
+    endwin();
+
+    return;
+
+}

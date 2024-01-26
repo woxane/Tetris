@@ -9,8 +9,7 @@
 #define ORANGE  "\033[38;2;255;165;0m"
 #define PURPLE  "\033[38;2;128;0;128m"
 
-void Draw(Block Board[18][10] , int NextShapeType , std::vector<std::vector<int>> NextShapeCords) {
-    std::cout << NextShapeType;
+void Draw(Block Board[18][10] , int NextShapeType , std::vector<std::vector<int>> NextShapeCords , int Score) {
     for (int Col = 0 ; Col < 20 ; Col++) {
         for (int Row = 0 ; Row < 12 ; Row++) {
             if (Col == 0) {
@@ -63,7 +62,7 @@ void Draw(Block Board[18][10] , int NextShapeType , std::vector<std::vector<int>
             }
 
             if (0 < Col & Col < 6 & Row == 11) {
-                std::cout << "         ";
+                std::cout << "    ";
                 if (Col == 1) {
                     std::cout << "┏━━next━━━┓";
                     continue;
@@ -127,6 +126,41 @@ void Draw(Block Board[18][10] , int NextShapeType , std::vector<std::vector<int>
                 }
 
             }
+
+            if (5 < Col & Col < 11 & Row == 11) {
+                std::cout << "    ";
+                if (Col == 6) {
+                    std::cout << "┏━━score━━┓";
+                    continue;
+
+                } else if (Col == 10) {
+                    std::cout << "┗━━━━━━━━━┛";
+                    continue ; 
+                } else {
+                    if (Col == 8) { 
+                        std::string BoxScore = "";
+                        int NumLength = (std::to_string(Score)).length();
+                        // WS as White space
+                        int LeftWS = (9 - NumLength) / 2; 
+                        int RightWS = 9 - NumLength - LeftWS; 
+
+                        for (int i = 0 ; i < LeftWS ; i++) {
+                            BoxScore += " ";
+                        } 
+
+                        BoxScore += std::to_string(Score);
+
+                        for (int i = 0 ; i < RightWS ; i++) {
+                            BoxScore += " ";
+                        }
+                        std::cout << "┃" << BoxScore << "┃";
+
+                    } else {
+                        std::cout << "┃         ┃";
+                    }
+                }
+            }
+
         }
         std::cout << std::endl ; 
     }

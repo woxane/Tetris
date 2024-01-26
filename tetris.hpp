@@ -104,3 +104,4 @@ int Level();
 std::string Nickname();
 int GameOver();
 void LeaderboardDraw(std::vector<LB> Leaderboard);
+int Pause();

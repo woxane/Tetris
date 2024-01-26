@@ -427,3 +427,68 @@ void LeaderboardDraw(std::vector<LB> Leaderboard) {
     return;
 
 }
+
+
+int Pause() {
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+
+    std::vector<std::string> options = {"Resume", "Save and Quit", "Quit"};
+    int height, width;
+    getmaxyx(stdscr, height, width);
+
+    int box_height = options.size() + 2;
+    int box_width = 0;
+
+    for (const auto& option : options) {
+        box_width = std::max(box_width, static_cast<int>(option.length()) + 3);
+    }
+
+    box_width += 2;
+
+    int start_y = height / 2 - box_height / 2;
+    int start_x = width / 2 - box_width / 2;
+
+    WINDOW* menu_win = newwin(box_height, box_width, start_y, start_x);
+
+    int highlight = 1;
+    int choice = 0;
+
+    while (true) {
+        box(menu_win, 0, 0);
+        for (int i = 0; i < options.size(); i++) {
+            if (highlight == i + 1) {
+                wattron(menu_win, A_REVERSE);
+                mvwprintw(menu_win, i + 1, 1, options[i].c_str());
+                wattroff(menu_win, A_REVERSE);
+            } else {
+                mvwprintw(menu_win, i + 1, 1, options[i].c_str());
+            }
+        }
+        wrefresh(menu_win);
+
+        int ch = getch();
+        switch (ch) {
+            case KEY_UP:
+                highlight = (highlight - 1 == 0) ? options.size() : highlight - 1;
+                break;
+            case KEY_DOWN:
+                highlight = (highlight + 1 > options.size()) ? 1 : highlight + 1;
+                break;
+            case 10: 
+                choice = highlight;
+                break;
+        }
+
+        if (choice != 0) {
+            break;
+        }
+    }
+
+    endwin();
+
+    return choice;
+
+}

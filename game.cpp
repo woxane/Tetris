@@ -42,7 +42,7 @@ void Play(Game game) {
 
         } else if (ch == ' ') {
             while (!game.CannotMove) {
-                Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth , true);
+                Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth , true , true);
             }
         }
 
@@ -78,7 +78,7 @@ std::vector<std::vector<int>> DroppingBlock(std::vector<std::vector<Block>>& Boa
     return Cords;       
 }
 
-void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , int Height , int Width , bool UserInput ) {
+void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , int Height , int Width , bool UserInput , bool Fall) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board , Height , Width); 
 
     // When Neither we can have any New Shape or Move
@@ -118,8 +118,12 @@ void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewS
         Board[Cords[i][0] + 1][Cords[i][1]].Dropping = true;
     }
 
-    if (UserInput) {
-        Score++;
+    if (UserInput) { 
+        if (Fall) {
+            Score += 2;
+        } else {
+            Score++;
+        }
     }
 
     Pivot[0] += 1;
@@ -353,7 +357,7 @@ void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int Nex
         }
     }
 
-    int TotalScore = CalculateScore(NumberOfRows);
+    int TotalScore = (Width / 10.0) * CalculateScore(NumberOfRows);
     Score += TotalScore;
 
     Cls();

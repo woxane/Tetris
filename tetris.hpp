@@ -72,7 +72,7 @@ std::string ConvertTime(long long int ElapsedTime);
 // game.cpp Part : 
 void Play(Game game);
 std::vector<std::vector<int>> DroppingBlock(std::vector<std::vector<Block>>& Board , int Height , int Width);
-void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , int Height , int Width , bool UserInput = false );
+void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , int Height , int Width , bool UserInput = false , bool Fall = false);
 void CheckDeath(std::vector<std::vector<Block>>& Board , bool& GameOver , int Width);
 void RandomShape(int& CurrentShape , int& NextShape , bool FirstTime = false);
 void AddShape(std::vector<std::vector<Block>>& Board, int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords , int Pivot[2]);

@@ -79,7 +79,7 @@ void ShiftDown(Block Board[18][10] , int Row);
 int CalculateScore(int Nth);
 
 // screen.cpp Part :
-void Draw(Block Board[18][10]); 
+void Draw(Block Board[18][10] , int NextShapeType , std::vector<std::vector<int>> NextShapeCords);
 int Menu();
 int Level();
 std::string Nickname();

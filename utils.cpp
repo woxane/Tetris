@@ -64,7 +64,8 @@ void LeaderboardAdd(LB Data , int Level) {
             break;
         
         case 4 :
-            FileName = "GOD.txt"
+            FileName = "GOD.txt";
+            break;
     }
 
     std::ofstream Leaderboard(FileName , std::ios::app) ;

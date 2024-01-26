@@ -46,8 +46,8 @@ void Play(Game game) {
         Cls();
         COUNT++;
         game.ElapsedTime += DeltaTime;
-        Draw(game.Board , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.Score);
-        CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1]);
+        Draw(game.Board , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.Score , game.ElapsedTime);
+        CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.ElapsedTime);
 
         if (game.CannotMove) {
             CheckDeath(game.Board , game.GameOver); 
@@ -314,7 +314,7 @@ void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]) {
 }
 
 
-void CompletedRows(Block Board[18][10] , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords) {
+void CompletedRows(Block Board[18][10] , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime) {
     std::vector<int> Rows; 
     int NumberOfRows = 0;
 
@@ -340,7 +340,7 @@ void CompletedRows(Block Board[18][10] , int& Score , int NextShape , std::vecto
     Score += TotalScore;
 
     Cls();
-    Draw(Board , NextShape , NextShapeCords , Score);
+    Draw(Board , NextShape , NextShapeCords , Score , ElapsedTime);
     
     for (int i = 0 ; i < Rows.size() ; i++) {
         std::cout << Rows[i] ; 

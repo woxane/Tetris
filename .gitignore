@@ -7,7 +7,6 @@ sites/site*/public/admin/
 sites/site*/public/setup/
 sites/site*/public/theme/
 textpattern/
-HISTORY.txt
-README.txt
+*.txt
 *.out
 tetris

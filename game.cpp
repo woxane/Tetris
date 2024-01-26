@@ -40,6 +40,10 @@ void Play(Game game) {
         } else if (ch == 'w') {
             Rotate(game.Board , game.NewShape , game.Pivot);
 
+        } else if (ch == ' ') {
+            while (!game.CannotMove) {
+                Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , true);
+            }
         }
 
         usleep(DeltaTime); 

@@ -206,7 +206,7 @@ int Menu() {
     int highlight = 0;
     int maxY, maxX;
     getmaxyx(stdscr, maxY, maxX);
-    const char *options[] = {"New Game", "How To Play", "Leaderboard", "Exit"};
+    const char *options[] = {"New Game", "Saved Game" ,"How To Play", "Leaderboard", "Exit"};
 
     int boxHeight = 6;
     int boxWidth = 20;

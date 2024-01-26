@@ -43,7 +43,7 @@ void Play(Game game) {
         usleep(DeltaTime); 
         Cls();
         COUNT++;
-        Draw(game.Board , game.NextShape , game.ShapeCords[game.NextShape - 1]);
+        Draw(game.Board , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.Score);
         CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1]);
 
         if (game.CannotMove) {
@@ -337,7 +337,7 @@ void CompletedRows(Block Board[18][10] , int& Score , int NextShape , std::vecto
     Score += TotalScore;
 
     Cls();
-    Draw(Board , NextShape , NextShapeCords);
+    Draw(Board , NextShape , NextShapeCords , Score);
     
     for (int i = 0 ; i < Rows.size() ; i++) {
         std::cout << Rows[i] ; 

@@ -14,7 +14,7 @@ void Play(Game game) {
                 break;
             }
 
-            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score);
+            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth);
 
             game.CannotMove = false;
             game.NewShape = false;  
@@ -23,26 +23,26 @@ void Play(Game game) {
 
         // Level is gonna based on the number we mod with COUNT 
         if (COUNT % 10 == 0) {
-            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score);
+            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth);
         }
 
         char ch = Getch();
         
         if (ch == 's') {
-            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , true);
+            Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth , true);
 
         } else if (ch == 'a') {
-            MoveLeft(game.Board , game.NewShape , game.Pivot);
+            MoveLeft(game.Board , game.NewShape , game.Pivot , game.BoardHeight , game.BoardWidth);
 
         } else if (ch == 'd') {
-            MoveRight(game.Board , game.NewShape , game.Pivot);
+            MoveRight(game.Board , game.NewShape , game.Pivot , game.BoardHeight , game.BoardWidth);
 
         } else if (ch == 'w') {
-            Rotate(game.Board , game.NewShape , game.Pivot);
+            Rotate(game.Board , game.NewShape , game.Pivot , game.BoardHeight , game.BoardWidth);
 
         } else if (ch == ' ') {
             while (!game.CannotMove) {
-                Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , true);
+                Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth , true);
             }
         }
 
@@ -50,24 +50,24 @@ void Play(Game game) {
         Cls();
         COUNT++;
         game.ElapsedTime += DeltaTime;
-        Draw(game.Board , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.Score , game.ElapsedTime);
+        Draw(game.Board , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.Score , game.ElapsedTime , game.BoardHeight , game.BoardWidth);
 
         if (game.CannotMove) {
-            CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.ElapsedTime);
+            CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.ElapsedTime , game.BoardHeight , game.BoardWidth);
         }
 
         if (game.CannotMove) {
-            CheckDeath(game.Board , game.GameOver); 
+            CheckDeath(game.Board , game.GameOver , game.BoardWidth); 
         }
     }
     std::cout << std::endl << "HEH YOU FUCKING LOSER YOU LOST";
 }
 
 
-std::vector<std::vector<int>> DroppingBlock(std::vector<std::vector<Block>>& Board) {
+std::vector<std::vector<int>> DroppingBlock(std::vector<std::vector<Block>>& Board , int Height , int Width) {
     std::vector<std::vector<int>> Cords; 
-    for (int Col = 0 ; Col < 18 ; Col++) {
-        for (int Row = 0 ; Row < 10 ; Row++) {
+    for (int Col = 0 ; Col < Height ; Col++) {
+        for (int Row = 0 ; Row < Width ; Row++) {
              if (Board[Col][Row].Dropping) {
                  std::vector<int> Cord = {Col , Row};
                  Cords.push_back(Cord);
@@ -78,8 +78,8 @@ std::vector<std::vector<int>> DroppingBlock(std::vector<std::vector<Block>>& Boa
     return Cords;       
 }
 
-void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , bool UserInput) {
-    std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
+void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , int Height , int Width , bool UserInput ) {
+    std::vector<std::vector<int>> Cords = DroppingBlock(Board , Height , Width); 
 
     // When Neither we can have any New Shape or Move
     if (Cords.size() == 0) {
@@ -90,7 +90,7 @@ void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewS
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape; 
 
     for (int i = 0 ; i < Cords.size() ; i++) {
-        if (Cords[i][0] + 1 > 17 ) {
+        if (Cords[i][0] + 1 > Height - 1 ) {
             CannotMove = true ; 
             NewShape= true;
             BlockFall(Board , Cords);
@@ -127,8 +127,8 @@ void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewS
 }
 
 
-void CheckDeath(std::vector<std::vector<Block>>& Board , bool& GameOver) {
-    for (int Row = 0 ; Row < 10 ; Row++) {
+void CheckDeath(std::vector<std::vector<Block>>& Board , bool& GameOver , int Width) {
+    for (int Row = 0 ; Row < Width ; Row++) {
         if (Board[0][Row].Dropping == false & Board[0][Row].Shape != 0 ) {
             GameOver = true;
             return ; 
@@ -198,12 +198,12 @@ void BlockFall(std::vector<std::vector<Block>>& Board , std::vector<std::vector<
 }
 
 
-void MoveRight(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2]) {
-    std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
+void MoveRight(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2] , int Height , int Width) {
+    std::vector<std::vector<int>> Cords = DroppingBlock(Board , Height , Width); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     
     for (int i = 0 ; i < Cords.size() ; i++) {
-        if (Cords[i][1] + 1 > 9 ) {
+        if (Cords[i][1] + 1 > Width - 1 ) {
             // beep sound
             return;
 
@@ -235,8 +235,8 @@ void MoveRight(std::vector<std::vector<Block>>& Board , bool& NewShape , int Piv
 }
 
 
-void MoveLeft(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2]){
-    std::vector<std::vector<int> > Cords = DroppingBlock(Board); 
+void MoveLeft(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2] , int Height , int Width){
+    std::vector<std::vector<int> > Cords = DroppingBlock(Board , Height , Width); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     
     for (int i = 0 ; i < Cords.size() ; i++) {
@@ -271,8 +271,8 @@ void MoveLeft(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivo
 }
 
 
-void Rotate(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2]) {
-    std::vector<std::vector<int>> Cords = DroppingBlock(Board);
+void Rotate(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2] , int Height , int Width) {
+    std::vector<std::vector<int>> Cords = DroppingBlock(Board , Height , Width);
     std::vector<std::vector<int>> RotatedCords;
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     float XCenter = 0.0 , YCenter = 0.0;
@@ -301,11 +301,11 @@ void Rotate(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[
     }
 
     for (int i = 0 ; i < Cords.size() ; i++) {
-        if (RotatedCords[i][0] > 17 || RotatedCords[i][0] < 0) {
+        if (RotatedCords[i][0] > Height - 1 || RotatedCords[i][0] < 0) {
             // beep sound
             return;
 
-        } else if (RotatedCords[i][1] > 9 || RotatedCords[i][1] < 0) {
+        } else if (RotatedCords[i][1] > Width - 1 || RotatedCords[i][1] < 0) {
             // beep sound
             return;
 
@@ -331,20 +331,20 @@ void Rotate(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[
 }
 
 
-void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime) {
+void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime , int Height , int Width) {
     std::vector<int> Rows; 
     int NumberOfRows = 0;
 
-    for (int i = 0 ; i < 18 ; i++) {
+    for (int i = 0 ; i < Height ; i++) {
         bool Completed = true;
-        for (int j = 0 ; j < 10 ; j++) {
+        for (int j = 0 ; j < Width ; j++) {
             if (Board[i][j].Shape == 0) {
                 Completed = false;
             }
         } 
 
         if (Completed) {
-            for (int j = 0 ; j < 10 ; j++) {
+            for (int j = 0 ; j < Width ; j++) {
                 Board[i][j].Shape = 0;
             }
 
@@ -357,7 +357,7 @@ void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int Nex
     Score += TotalScore;
 
     Cls();
-    Draw(Board , NextShape , NextShapeCords , Score , ElapsedTime);
+    Draw(Board , NextShape , NextShapeCords , Score , ElapsedTime , Height , Width);
     
     for (int i = 0 ; i < Rows.size() ; i++) {
         std::cout << Rows[i] ; 

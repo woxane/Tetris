@@ -17,6 +17,7 @@ struct Block {
     // Between 1 , 7  
     int Shape = 0;
     bool Dropping = false; 
+    bool IsGhost = false;
 
 };
 
@@ -83,6 +84,7 @@ void Rotate(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[
 void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime , int Height , int Width);
 void ShiftDown(std::vector<std::vector<Block>>& Board , int Row);
 int CalculateScore(int Nth);
+void GhostBlock(std::vector<std::vector<Block>>& Board , bool CannotMove , bool NewShape , int Pivot[2] , int Score , int Height , int Width);
 
 // screen.cpp Part :
 void Draw(std::vector<std::vector<Block>> Board , int NextShapeType , std::vector<std::vector<int>> NextShapeCords , int Score , long long int ElapsedTime , int Height , int Width);

@@ -89,3 +89,4 @@ void Draw(std::vector<std::vector<Block>> Board , int NextShapeType , std::vecto
 int Menu();
 int Level();
 std::string Nickname();
+int GameOver();

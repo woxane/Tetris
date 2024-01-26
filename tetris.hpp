@@ -30,8 +30,8 @@ struct Game {
     int Pivot[2] = {0,0};
     int Score = 0;
     long long int ElapsedTime = 0;
-    int BoardWidth = 10;
-    int BoardHeight = 18;
+    int BoardWidth = 15;
+    int BoardHeight = 24;
     // Note : The diffrence between ShapeCords And  
     // ShapeMainCords is that ShapeCords save all the Cordination of a Block  
     // But ShapeMainCords just save those that important for Dropping a Block .
@@ -71,21 +71,21 @@ std::string ConvertTime(long long int ElapsedTime);
 
 // game.cpp Part : 
 void Play(Game game);
-std::vector<std::vector<int>> DroppingBlock(std::vector<std::vector<Block>>& Board);
-void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , bool UserInput = false);
-void CheckDeath(std::vector<std::vector<Block>>& Board , bool& GameOver);
+std::vector<std::vector<int>> DroppingBlock(std::vector<std::vector<Block>>& Board , int Height , int Width);
+void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , int Height , int Width , bool UserInput = false );
+void CheckDeath(std::vector<std::vector<Block>>& Board , bool& GameOver , int Width);
 void RandomShape(int& CurrentShape , int& NextShape , bool FirstTime = false);
 void AddShape(std::vector<std::vector<Block>>& Board, int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords , int Pivot[2]);
 void BlockFall(std::vector<std::vector<Block>>& Board , std::vector<std::vector<int>> Cords);
-void MoveRight(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2]);
-void MoveLeft(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2]);
-void Rotate(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2]);
-void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime);
+void MoveRight(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2] , int Height , int Width);
+void MoveLeft(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2] , int Height , int Width);
+void Rotate(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2] , int Height , int Width);
+void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime , int Height , int Width);
 void ShiftDown(std::vector<std::vector<Block>>& Board , int Row);
 int CalculateScore(int Nth);
 
 // screen.cpp Part :
-void Draw(std::vector<std::vector<Block>> Board , int NextShapeType , std::vector<std::vector<int>> NextShapeCords , int Score , long long int ElapsedTime);
+void Draw(std::vector<std::vector<Block>> Board , int NextShapeType , std::vector<std::vector<int>> NextShapeCords , int Score , long long int ElapsedTime , int Height , int Width);
 int Menu();
 int Level();
 std::string Nickname();

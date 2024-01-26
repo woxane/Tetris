@@ -73,6 +73,13 @@ std::vector<std::vector<int>> DroppingBlock(Block Board[18][10]) {
 
 void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
+
+    // When Neither we can have any New Shape or Move
+    if (Cords.size() == 0) {
+        CannotMove = true;
+        return;
+    }
+
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape; 
 
     for (int i = 0 ; i < Cords.size() ; i++) {

@@ -119,6 +119,8 @@ std::vector<LB> LeaderboardRead(int Level) {
     while (Leaderboard >> temp.Name >> temp.Score >> temp.ElapsedTime) {
         Data.push_back(temp);
     }
+    
+    std::sort(Data.begin() , Data.end() , Compare);
 
     return Data;
 

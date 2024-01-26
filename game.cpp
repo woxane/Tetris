@@ -57,7 +57,7 @@ void Play(Game game) {
 }
 
 
-std::vector<std::vector<int>> DroppingBlock(Block Board[18][10]) {
+std::vector<std::vector<int>> DroppingBlock(std::vector<std::vector<Block>>& Board) {
     std::vector<std::vector<int>> Cords; 
     for (int Col = 0 ; Col < 18 ; Col++) {
         for (int Row = 0 ; Row < 10 ; Row++) {
@@ -71,7 +71,7 @@ std::vector<std::vector<int>> DroppingBlock(Block Board[18][10]) {
     return Cords;       
 }
 
-void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , bool UserInput) {
+void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , bool UserInput) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
 
     // When Neither we can have any New Shape or Move
@@ -120,7 +120,7 @@ void Drop(Block Board[18][10] , bool& CannotMove , bool& NewShape , int Pivot[2]
 }
 
 
-void CheckDeath(Block Board[18][10] , bool& GameOver) {
+void CheckDeath(std::vector<std::vector<Block>>& Board , bool& GameOver) {
     for (int Row = 0 ; Row < 10 ; Row++) {
         if (Board[0][Row].Dropping == false & Board[0][Row].Shape != 0 ) {
             GameOver = true;
@@ -162,7 +162,7 @@ void RandomShape(int& CurrentShape , int& NextShape , bool FirstTime) {
 }
 
 
-void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords , int Pivot[2]) {
+void AddShape(std::vector<std::vector<Block>>& Board , int ShapeType , bool& GameOver , std::vector<std::vector<int>> BlockCords , int Pivot[2]) {
     for (int i = 0 ; i < BlockCords.size() ; i++) {
         if (Board[BlockCords[i][0]][BlockCords[i][1]].Shape != 0) {
             GameOver = true;
@@ -182,7 +182,7 @@ void AddShape(Block Board[18][10] , int ShapeType , bool& GameOver , std::vector
 }
 
 
-void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords) {
+void BlockFall(std::vector<std::vector<Block>>& Board , std::vector<std::vector<int>> Cords) {
     for (int i = 0 ; i < Cords.size() ; i++) {
         Board[Cords[i][0]][Cords[i][1]].Dropping = false; 
     }
@@ -191,7 +191,7 @@ void BlockFall(Block Board[18][10] , std::vector<std::vector<int>> Cords) {
 }
 
 
-void MoveRight(Block Board[18][10] , bool& NewShape , int Pivot[2]) {
+void MoveRight(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2]) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     
@@ -228,7 +228,7 @@ void MoveRight(Block Board[18][10] , bool& NewShape , int Pivot[2]) {
 }
 
 
-void MoveLeft(Block Board[18][10] , bool& NewShape , int Pivot[2]){
+void MoveLeft(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2]){
     std::vector<std::vector<int> > Cords = DroppingBlock(Board); 
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
     
@@ -264,7 +264,7 @@ void MoveLeft(Block Board[18][10] , bool& NewShape , int Pivot[2]){
 }
 
 
-void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]) {
+void Rotate(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2]) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board);
     std::vector<std::vector<int>> RotatedCords;
     int Shape = Board[Cords[0][0]][Cords[0][1]].Shape;
@@ -324,7 +324,7 @@ void Rotate(Block Board[18][10] , bool& NewShape , int Pivot[2]) {
 }
 
 
-void CompletedRows(Block Board[18][10] , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime) {
+void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime) {
     std::vector<int> Rows; 
     int NumberOfRows = 0;
 
@@ -361,7 +361,7 @@ void CompletedRows(Block Board[18][10] , int& Score , int NextShape , std::vecto
 }
 
 
-void ShiftDown(Block Board[18][10] , int Row) {
+void ShiftDown(std::vector<std::vector<Block>>& Board , int Row) {
     for (int i = Row ; i > 0 ; i--) {
         for (int j = 0 ; j < 10 ; j++) {
             Board[i][j].Shape = Board[i - 1][j].Shape;

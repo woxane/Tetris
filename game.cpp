@@ -392,3 +392,28 @@ int CalculateScore(int Nth) {
 
     return CalculateScore(Nth - 1) * (2 + std::pow(2, Nth - 3));
 }
+
+
+
+void GhostBlock(std::vector<std::vector<Block>>& Board , bool CannotMove , bool NewShape , int Pivot[2] , int Score , int Height , int Width) { 
+    std::vector<std::vector<Block>> Temp = Board;
+    int PivotTemp[2];
+    PivotTemp[0] = Pivot[0];
+    PivotTemp[1] = Pivot[1];
+
+    while (!CannotMove) {
+        Drop(Temp, CannotMove , NewShape , PivotTemp , Score , Height , Width , false , false , true);
+    }
+
+    for (int i = 0 ; i < Height ; i++) {
+        for (int j = 0 ; j < Width ; j++) {
+            Board[i][j].IsGhost = false;
+        }
+    }
+
+    std::vector<std::vector<int>> Cords = DroppingBlock(Temp, Height , Width);
+    for (int i = 0 ; i < Cords.size() ; i++) {
+        Board[Cords[i][0]][Cords[i][1]].IsGhost = true;
+
+    }
+}

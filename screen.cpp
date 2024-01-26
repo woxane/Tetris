@@ -9,7 +9,8 @@
 #define ORANGE  "\033[38;2;255;165;0m"
 #define PURPLE  "\033[38;2;128;0;128m"
 
-void Draw(Block Board[18][10]) {
+void Draw(Block Board[18][10] , int NextShapeType , std::vector<std::vector<int>> NextShapeCords) {
+    std::cout << NextShapeType;
     for (int Col = 0 ; Col < 20 ; Col++) {
         for (int Row = 0 ; Row < 12 ; Row++) {
             if (Col == 0) {
@@ -58,6 +59,72 @@ void Draw(Block Board[18][10]) {
 
             } else {
                 std::cout << "  " ;  
+
+            }
+
+            if (0 < Col & Col < 6 & Row == 11) {
+                std::cout << "         ";
+                if (Col == 1) {
+                    std::cout << "┏━━next━━━┓";
+                    continue;
+
+                } else if (Col == 5) {
+                    std::cout << "┗━━━━━━━━━┛";
+                    continue;
+                }
+
+                for (int i = 0 ; i < 6 ; i++) {
+                    if (i == 0) {
+                        std::cout << "┃";
+                        continue;
+                        
+                    } else if (i == 5) {
+                        std::cout << " ┃";
+                        continue;
+                    } 
+
+                    std::vector<int> Pos = {Col - 2 , i + 2};
+                    std::vector<std::vector<int>>::iterator It = std::find(NextShapeCords.begin(), NextShapeCords.end(), Pos);
+
+                    if (It != NextShapeCords.end()) {
+                        switch (NextShapeType) {
+                            case 1 : 
+                                std::cout << YELLOW;
+                                break;
+
+                            case 2 : 
+                                std::cout << CYAN;
+                                break;
+
+                            case 3 :
+                                std::cout << BLUE;
+                                break;
+
+                            case 4 :
+                                std::cout << ORANGE;
+                                break;
+
+                            case 5 : 
+                                std::cout << RED;
+                                break;
+
+                            case 6 : 
+                                std::cout << GREEN;
+                                break;
+
+                            case 7 :
+                                std::cout << PURPLE; 
+                                break;
+                        }
+
+                        std::cout << "██" << RESET;
+
+                    } else {
+                        std::cout << "  ";
+
+                    }
+
+                }
 
             }
         }

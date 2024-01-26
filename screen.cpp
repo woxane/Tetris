@@ -82,6 +82,9 @@ void Draw(std::vector<std::vector<Block>> Board , int NextShapeType , std::vecto
 
                 std::cout << "██" << RESET;
 
+            } else if (Board[Col - 1][Row - 1].Shape == 0 & Board[Col - 1][Row - 1].IsGhost) {
+                std::cout << "░░";
+
             } else {
                 std::cout << "  " ;  
 

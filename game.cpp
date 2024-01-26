@@ -18,7 +18,8 @@ void Play(Game game) {
 
             game.CannotMove = false;
             game.NewShape = false;  
-        
+
+            GhostBlock(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth); 
         }
 
         // Level is gonna based on the number we mod with COUNT 
@@ -45,6 +46,8 @@ void Play(Game game) {
                 Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth , true , true);
             }
         }
+
+        GhostBlock(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth); 
 
         usleep(DeltaTime); 
         Cls();
@@ -78,7 +81,7 @@ std::vector<std::vector<int>> DroppingBlock(std::vector<std::vector<Block>>& Boa
     return Cords;       
 }
 
-void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , int Height , int Width , bool UserInput , bool Fall) {
+void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewShape , int Pivot[2] , int& Score , int Height , int Width , bool UserInput , bool Fall , bool Ghost) {
     std::vector<std::vector<int>> Cords = DroppingBlock(Board , Height , Width); 
 
     // When Neither we can have any New Shape or Move
@@ -93,6 +96,11 @@ void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewS
         if (Cords[i][0] + 1 > Height - 1 ) {
             CannotMove = true ; 
             NewShape= true;
+
+            if (Ghost) {
+                return; 
+            }
+
             BlockFall(Board , Cords);
             return ; 
         }
@@ -103,6 +111,11 @@ void Drop(std::vector<std::vector<Block>>& Board , bool& CannotMove , bool& NewS
         } else if (Board[Cords[i][0] + 1][Cords[i][1]].Shape != 0) {
             CannotMove = true; 
             NewShape = true;
+
+            if (Ghost) {
+                return; 
+            }
+
             BlockFall(Board , Cords);
             return; 
         }

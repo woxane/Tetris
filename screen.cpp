@@ -411,7 +411,7 @@ void LeaderboardDraw(std::vector<LB> Leaderboard) {
 
     for (size_t i = 0; i < Leaderboard.size(); ++i) {
         mvwprintw(box_win, center_y - Leaderboard.size() / 2 + i , center_x - box_width / 2 - 10 ,
-                  "%d) %s %d %f", i + 1, Leaderboard[i].Name.c_str() , Leaderboard[i].Score , ConvertTime(Leaderboard[i].ElapsedTime).c_str());
+                  "%d) %s %d %s", i + 1, Leaderboard[i].Name.c_str() , Leaderboard[i].Score , ConvertTime(Leaderboard[i].ElapsedTime).c_str());
     }
 
     wrefresh(box_win);

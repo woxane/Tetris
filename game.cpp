@@ -10,6 +10,9 @@ void Play(Game game) {
             RandomShape(game.CurrentShape , game.NextShape); 
             AddShape(game.Board , game.CurrentShape , game.GameOver , game.ShapeCords[game.CurrentShape - 1] , game.Pivot); 
 
+
+            CheckDeath(game.Board , game.GameOver , game.BoardWidth); 
+            
             if (game.GameOver) {
                 break;
             }

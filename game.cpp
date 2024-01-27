@@ -79,7 +79,7 @@ void Play(Game game) {
         Draw(game.Board , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.Score , game.ElapsedTime , game.BoardHeight , game.BoardWidth);
 
         if (game.CannotMove) {
-            CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.ElapsedTime , game.BoardHeight , game.BoardWidth);
+            CompletedRows(game.Board , game.Score , game.NextShape , game.ShapeCords[game.NextShape - 1] , game.ElapsedTime , game.BoardHeight , game.BoardWidth , DeltaTime);
         }
 
         if (game.CannotMove) {
@@ -376,7 +376,7 @@ void Rotate(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[
 }
 
 
-void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime , int Height , int Width) {
+void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime , int Height , int Width , int& DeltaTime) {
     std::vector<int> Rows; 
     int NumberOfRows = 0;
 
@@ -400,7 +400,10 @@ void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int Nex
 
     int TotalScore = (Height / 18.0) * (Width / 10.0) * CalculateScore(NumberOfRows);
     Score += TotalScore;
+    if (DeltaTime > 15000) {
+        DeltaTime -= 1000;
 
+    } 
     Cls();
     Draw(Board , NextShape , NextShapeCords , Score , ElapsedTime , Height , Width);
     

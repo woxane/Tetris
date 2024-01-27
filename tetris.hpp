@@ -95,7 +95,7 @@ void BlockFall(std::vector<std::vector<Block>>& Board , std::vector<std::vector<
 void MoveRight(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2] , int Height , int Width);
 void MoveLeft(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2] , int Height , int Width);
 void Rotate(std::vector<std::vector<Block>>& Board , bool& NewShape , int Pivot[2] , int Height , int Width);
-void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime , int Height , int Width);
+void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int NextShape , std::vector<std::vector<int>> NextShapeCords , long long int ElapsedTime , int Height , int Width , int& DeltaTime);
 void ShiftDown(std::vector<std::vector<Block>>& Board , int Row);
 int CalculateScore(int Nth);
 void GhostBlock(std::vector<std::vector<Block>>& Board , bool CannotMove , bool NewShape , int Pivot[2] , int Score , int Height , int Width);

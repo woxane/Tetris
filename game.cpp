@@ -398,7 +398,7 @@ void CompletedRows(std::vector<std::vector<Block>>& Board , int& Score , int Nex
         }
     }
 
-    int TotalScore = (Width / 10.0) * CalculateScore(NumberOfRows);
+    int TotalScore = (Height / 18.0) * (Width / 10.0) * CalculateScore(NumberOfRows);
     Score += TotalScore;
 
     Cls();

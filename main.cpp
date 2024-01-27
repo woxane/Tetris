@@ -59,6 +59,7 @@ int main() {
 				std::cout << "-- 2) You could move down faster using s key ." << std::endl;
 				std::cout << "-- 3) You could rotate your block using w key . " << std::endl;
 				std::cout << "-- 4) You could fall your block using space key . " << std::endl; 
+				std::cout << "-- 5) You could pause the game with p key" << std::endl;
 				std::cout << "-Game Flow : " << std::endl;
 				std::cout << " -- 1) You must know that there are 5 types of level in this game : " << std::endl;
 				std::cout << "---- Noob  ,  Beginner , Pro  ,  Hacker  ,  GODD ." << std::endl;

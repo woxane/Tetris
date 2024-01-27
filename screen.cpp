@@ -489,7 +489,7 @@ int Pause() {
 }
 
 
-std::string TetrisSize () {
+std::pair<int , int> TetrisSize () {
     initscr();
     cbreak();
     noecho();
@@ -545,6 +545,18 @@ std::string TetrisSize () {
 
     endwin(); // End the library
 
-    return std::string(userInput);
+
+    std::string InputString(userInput);
+    std::istringstream SSInput(InputString);
+
+    int H,W;
+
+    if (SSInput >> H >> W) {
+        return std::make_pair(H , W);
+    } else {
+        return std::make_pair(18,10);
+    }
+
+
 
 }

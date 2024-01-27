@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <sstream>
 #include <fstream>
+#include <utility>
 
 
 struct Block {
@@ -107,7 +108,7 @@ std::string Nickname();
 int GameOver();
 void LeaderboardDraw(std::vector<LB> Leaderboard);
 int Pause();
-std::string TetrisSize ();
+std::pair<int , int> TetrisSize();
 
 // main.cpp part : 
 void NewGame();

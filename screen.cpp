@@ -240,7 +240,7 @@ int Menu() {
                 return highlight;
         }
     }
-
+    clear();
     endwin();
     return 5;
 }
@@ -289,6 +289,7 @@ int Level() {
         }
 
     } while (ch != 10); 
+    clear();
     endwin();
     return currentOption;
 }
@@ -347,7 +348,7 @@ std::string Nickname() {
                 break;
         }
     }
-    
+    clear();
     endwin();
     return std::string(nickname);
 }
@@ -370,6 +371,7 @@ int GameOver() {
     mvprintw(centerY + 1, centerX - 7, std::string("Try again? (y/n)").c_str());
 
     int ch = getch();
+    clear();
     endwin(); 
 
     if (ch == 'y' || ch == 'Y') {
@@ -417,6 +419,7 @@ void LeaderboardDraw(std::vector<LB> Leaderboard) {
     wrefresh(box_win);
 
     getch();
+    clear();
     endwin();
 
     return;
@@ -541,8 +544,7 @@ std::pair<int , int> TetrisSize () {
 
     }
 
-
-
+    clear();
     endwin(); // End the library
 
 

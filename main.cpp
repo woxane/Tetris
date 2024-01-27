@@ -6,11 +6,15 @@
 void NewGame() {
 	std::string Name = Nickname();
 	int GameLevel = Level();
-
+	std::pair<int , int> Size = TetrisSize();
+	int H = Size.first;
+	int W = Size.second;
 	Game tetris; 
 	tetris.FPS = 25;
 	tetris.Name = Name;
 	tetris.Level = GameLevel; 
+	tetris.BoardHeight = H;
+	tetris.BoardWidth = W;
 	for (int i = 0 ; i < tetris.BoardHeight ; i++) {
 		std::vector<Block> Row;
 		for (int j = 0 ; j < tetris.BoardWidth ; j++) {

@@ -426,7 +426,6 @@ void LeaderboardDraw(std::vector<LB> Leaderboard) {
 
 }
 
-
 int Pause() {
     initscr();
     cbreak();
@@ -440,7 +439,7 @@ int Pause() {
     int box_height = options.size() + 2;
     int box_width = 0;
 
-    for (const auto& option : options) {
+    for (const std::string& option : options) {
         box_width = std::max(box_width, static_cast<int>(option.length()) + 3);
     }
 
@@ -475,7 +474,7 @@ int Pause() {
             case KEY_DOWN:
                 highlight = (highlight + 1 > options.size()) ? 1 : highlight + 1;
                 break;
-            case 10: 
+            case 10:
                 choice = highlight;
                 break;
         }
@@ -484,11 +483,10 @@ int Pause() {
             break;
         }
     }
-
+    clear();
     endwin();
 
     return choice;
-
 }
 
 

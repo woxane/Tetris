@@ -48,6 +48,24 @@ void Play(Game game) {
             while (!game.CannotMove) {
                 Drop(game.Board , game.CannotMove , game.NewShape , game.Pivot , game.Score , game.BoardHeight , game.BoardWidth , true , true);
             }
+        } else if (ch == 'p') {
+            int Choose = Pause();
+            std::cout << Choose;
+            switch (Choose) {
+                case 1 : 
+                    break;
+                
+                case 2 : 
+                    // Save game 
+                    // Not implemented
+                    break;
+                
+                case 3 : 
+                    // Quit
+                    return;
+                    break;
+
+            }
         }
 
         if (game.Level == 0) {

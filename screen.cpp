@@ -412,6 +412,11 @@ void LeaderboardDraw(std::vector<LB> Leaderboard) {
     int center_x = width / 2;
 
     for (size_t i = 0; i < Leaderboard.size(); ++i) {
+        if (Leaderboard.size() == 0) {
+            mvwprintw(box_win, center_y , center_x - box_width / 2 - 10 ,
+                    "There is no Leaderboard saved !");
+
+        }  
         mvwprintw(box_win, center_y - Leaderboard.size() / 2 + i , center_x - box_width / 2 - 10 ,
                   "%d) %s %d %s", i + 1, Leaderboard[i].Name.c_str() , Leaderboard[i].Score , ConvertTime(Leaderboard[i].ElapsedTime).c_str());
     }
